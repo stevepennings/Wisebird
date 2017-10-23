@@ -1,11 +1,12 @@
 language: node_js
 node_js:
   - "6"
-before_script:
+before_script: 
 - npm install -g bower polymer-cli@next
 - bower install
-script: [
-"xvfb-run"
-],
+
+script: 
+- "xvfb-run"
+
 notifications:
     slack: wisebird-application:QTYLKZbxCxmRKti24F9fo9BF
