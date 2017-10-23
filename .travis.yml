@@ -1,6 +1,6 @@
 language: node_js
 before_script:
-- npm install -g bower polymer-cli@next firebase-tools
+- npm install -g bower polymer-cli@next
 - bower install
 notifications:
     slack: wisebird-application:QTYLKZbxCxmRKti24F9fo9BF
