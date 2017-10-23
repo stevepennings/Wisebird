@@ -1,9 +1,10 @@
+language: node_js
+node_js: "6"
 before_script:
   - "npm install -g bower polymer-cli@next"
   - "bower install"
-language: node_js
-node_js: "6"
+  script:
+  - xvfb-run npm test
 notifications:
+  email: false
   slack: "wisebird-application:QTYLKZbxCxmRKti24F9fo9BF"
-script:
-  - xvfb-run
