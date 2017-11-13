@@ -10,14 +10,12 @@ addons:
     - google-chrome-stable
 node_js:
 - '6'
-#- '5'
-#- '4'
 before_script:
   - "npm install -g bower polymer-cli@next"
   - "bower install"
 script:
   - xvfb-run npm test
-  - xvfb-run npm run test:integration
+  - polymer build --bundle --js-minify --css-minify --html-minify
 notifications:
   email: false
   slack: "wisebird-application:QTYLKZbxCxmRKti24F9fo9BF"
