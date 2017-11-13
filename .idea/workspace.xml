@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe66a97d-f476-4e01-b3de-112e3d706514" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/wisebird-app/wisebird-app_test.html" afterPath="$PROJECT_DIR$/test/wisebird-app/wisebird-app_test.html" />
-    </list>
+    <list default="true" id="fe66a97d-f476-4e01-b3de-112e3d706514" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -273,12 +271,12 @@
       <workItem from="1508774742081" duration="1042000" />
       <workItem from="1510237726483" duration="528000" />
       <workItem from="1510331024359" duration="3269000" />
-      <workItem from="1510560661455" duration="2410000" />
+      <workItem from="1510560661455" duration="3009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7249000" />
+    <option name="totallyTimeSpent" value="7848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
