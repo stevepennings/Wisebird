@@ -5,6 +5,7 @@
     "src/my-homescreen.html",
     "src/my-leaderboard.html",
     "src/my-settings.html",
+    "src/my-login.html",
     "src/my-logout.html",
     "src/my-view404.html"
   ],
