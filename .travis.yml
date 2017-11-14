@@ -1,10 +1,11 @@
 language: node_js
+node_js: '6'
 before_script:
-- npm install
-- bower install
+  - npm install -g bower
+  - bower install
 script:
 - npm run lint
-- polymer build
+- polymer build --bundle --js-minify --css-minify --html-minify
 notifications:
   email: false
   slack: "wisebird-application:QTYLKZbxCxmRKti24F9fo9BF"
