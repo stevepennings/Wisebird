@@ -17,7 +17,7 @@ before_script:
 - bower install
 script:
 - npm run lint
-- polymer build
+- polymer build --bundle --js-minify --css-minify --html-minify
 notifications:
   email: false
   slack: "wisebird-application:QTYLKZbxCxmRKti24F9fo9BF"
