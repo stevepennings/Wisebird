@@ -1,0 +1,10 @@
+language: node_js
+before_script:
+- npm install
+- bower install
+script:
+- npm run lint
+- polymer build
+notifications:
+  email: false
+  slack: "wisebird-application:QTYLKZbxCxmRKti24F9fo9BF"
