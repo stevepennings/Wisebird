@@ -19,6 +19,7 @@
     "rules": ["polymer-2"]
   },
   "builds": [
+  	"name": "wisebird",
     {
       "preset": "es5-bundled"
     },
