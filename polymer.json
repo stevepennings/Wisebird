@@ -19,15 +19,11 @@
   "lint": {
     "rules": ["polymer-2"]
   },
-  "builds": [
-    {
-      "preset": "es5-bundled"
-    },
-    {
-      "preset": "es6-bundled"
-    },
-    {
-      "preset": "es6-unbundled"
-    }
-  ]
+  "builds": [{
+    "name": "default",
+    "bundle": true,
+    "js": {"compile": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
+  }]
 }
