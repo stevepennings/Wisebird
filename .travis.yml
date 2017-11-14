@@ -4,7 +4,6 @@ before_script:
   - npm install -g bower
   - bower install
 script:
-- npm run lint
 - polymer build --bundle --js-minify --css-minify --html-minify
 notifications:
   email: false
