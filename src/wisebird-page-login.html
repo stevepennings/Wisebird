@@ -1,0 +1,152 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="shared-styles.html">
+
+<link rel="import" href="wisebird-element-login.html">
+
+<dom-module id="wisebird-page-login">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+                height: 100vh;
+                text-align: center;
+            }
+
+            html, body {
+                height: 100vh;
+            }
+
+            .content {
+                height: 640px;
+                min-height: 100vh;
+                min-width: 320px;
+                background-image: url('../images/login/login-background.svg');
+                background-position: center;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+            }
+
+            .sign-in {
+                background-color: #F5F5F5;
+                position: absolute;
+                bottom: 250px;
+                width: 200px;
+                height: 60px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                border-radius: 30px;
+                transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+            }
+
+            .sign-in:hover {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+            }
+
+            .sign-in-container {
+                display: flex;
+            }
+
+            .sign-in-icon {
+                width: 32px;
+                height: 32px;
+                margin-right: 28px;
+            }
+
+            .login-text {
+                opacity: 0.54;
+                font-weight: bold;
+                margin: auto 56px auto 0;
+            }
+
+            .palmtree{
+                position:absolute;
+                height: 200px;
+                width: 200px;
+                bottom: 30px;
+                right: 0;
+            }
+
+            .wisebird-logo{
+                position:absolute;
+                height:120px;
+                width:300px;
+                top: 100px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+        </style>
+
+        <firebase-app
+                id="firebase"
+                auth-domain="wisebird-26f0e.firebaseapp.com"
+                database-url="https://wisebird-26f0e.firebaseio.com"
+                api-key="AIzaSyC6Qsa0zD5AGK8W7iIVM2OiVnhrKmIkp5Y"
+                storage-bucket="polymerfire-test.appspot.com"
+                messaging-sender-id="268033523353">
+        </firebase-app>
+        <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
+        </firebase-auth>
+
+        <div class="content">
+            <iron-image class="wisebird-logo" sizing="contain"
+                        src="../images/wisebird-logo.svg"></iron-image>
+
+            <wisebird-element-login>
+
+                <paper-button raised on-tap="login" class="sign-in google">
+                    <div class="sign-in-container">
+                        <img class="sign-in-icon" src="../images/google-logo.svg"/>
+                        <span class="login-text">LOGIN</span>
+                    </div>
+                </paper-button>
+
+                <template is="dom-if" if="[[user]]">
+                    <h1>Welcome [[user.displayName]]</h1>
+                </template>
+            </wisebird-element-login>
+
+            <iron-image class="palmtree" sizing="contain"
+                        src="../images/login/login-palmtree.svg"></iron-image>
+        </div>
+    </template>
+
+    <script>
+        class wisebirdLogin extends Polymer.Element {
+            static get is() {
+                return 'wisebird-page-login';
+            }
+
+            static get properties() {
+                return {};
+            }
+
+            login() {
+                return this.$.auth.signInWithPopup();
+            }
+
+            logout() {
+                return this.$.auth.signOut();
+            }
+        }
+
+        window.customElements.define(wisebirdLogin.is, wisebirdLogin);
+    </script>
+</dom-module>

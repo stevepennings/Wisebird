@@ -8,5 +8,8 @@
   "scripts": {
     "lint": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "npm run lint && polymer test"
+  },
+  "dependencies": {
+    "firebase": "^4.6.2"
   }
 }
