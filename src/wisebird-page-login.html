@@ -11,11 +11,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="shared-styles.html">
 
-<link rel="import" href="wisebird-element-login.html">
 
 <dom-module id="wisebird-page-login">
     <template>
@@ -94,22 +92,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         </style>
 
-        <firebase-app
-                id="firebase"
-                auth-domain="wisebird-26f0e.firebaseapp.com"
-                database-url="https://wisebird-26f0e.firebaseio.com"
-                api-key="AIzaSyC6Qsa0zD5AGK8W7iIVM2OiVnhrKmIkp5Y"
-                storage-bucket="polymerfire-test.appspot.com"
-                messaging-sender-id="268033523353">
-        </firebase-app>
-        <firebase-auth id="auth" user="{{user}}" provider="google" on-error="handleError">
+        <firebase-auth
+                id="auth"
+                user="{{user}}"
+                status-known="{{statusKnown}}"
+                provider="google">
         </firebase-auth>
 
         <div class="content">
             <iron-image class="wisebird-logo" sizing="contain"
                         src="../images/wisebird-logo.svg"></iron-image>
-
-            <wisebird-element-login>
 
                 <paper-button raised on-tap="login" class="sign-in google">
                     <div class="sign-in-container">
@@ -121,7 +113,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <template is="dom-if" if="[[user]]">
                     <h1>Welcome [[user.displayName]]</h1>
                 </template>
-            </wisebird-element-login>
 
             <iron-image class="palmtree" sizing="contain"
                         src="../images/login/login-palmtree.svg"></iron-image>
@@ -135,11 +126,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             static get properties() {
-                return {};
+                return {
+                    user: {
+                        type: Object,
+                        notify: true,
+                    },
+                };
             }
 
             login() {
-                return this.$.auth.signInWithPopup();
+                return this.$.auth.signInWithRedirect();
             }
 
             logout() {
