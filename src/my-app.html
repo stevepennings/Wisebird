@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
@@ -39,13 +40,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             :host {
                 --app-primary-color: #4285f4;
                 --app-secondary-color: black;
-
+                --app-drawer-width: 64px;
                 display: block;
                 height: 100vh;
             }
 
             app-drawer-layout:not([narrow]) [drawer-toggle] {
                 display: none;
+            }
+
+            .menu {
+                background-color: #313131;
+                width: 100%;
+                height: 100%;
+                box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            }
+
+            .profile-image {
+                margin: 0 auto;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+                border: 2px solid #424242;
             }
 
             app-header {
@@ -58,24 +77,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --paper-icon-button-ink-color: white;
             }
 
+            .actions{
+                position: absolute;
+                bottom: 140px;
+            }
+
             .drawer-list {
                 margin: 0 20px;
             }
 
             .drawer-list a {
                 display: block;
-                padding: 0 16px;
+                padding: 0 20px;
                 text-decoration: none;
                 color: var(--app-secondary-color);
-                line-height: 40px;
+                line-height: 64px;
+            }
+
+            .drawer-list a:hover {
+                background-color: #424242;
             }
 
             .drawer-list a.iron-selected {
-                color: black;
-                font-weight: bold;
-            }
-
-            .toolbar-right {
+                background-color: #424242;
             }
 
             .hidden {
@@ -109,13 +133,35 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-drawer-layout fullbleed narrow="{{narrow}}">
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" id="user">
-                <app-toolbar id="user">Menu</app-toolbar>
-                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation"
-                               id="user">
-                    <a name="homescreen" href="[[rootPath]]homescreen">Homescreen</a>
-                    <a name="leaderboard" href="[[rootPath]]leaderboard">Leaderboard</a>
-                    <a name="settings" href="[[rootPath]]settings">Settings</a>
-                </iron-selector>
+                <div class="menu">
+                    <app-toolbar>
+                        <iron-image style="width:36px; height:36px;" sizing="contain"
+                                    src="../images/wisebird-emblem.svg"></iron-image>
+                    </app-toolbar>
+                    <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                        <a class="tab" name="homescreen" href="[[rootPath]]homescreen">
+                            <iron-icon class="unselected" src="../images/menu/homescreen-white.svg"></iron-icon>
+                            <!--<iron-icon class="selected" src="../images/menu/homescreen-color.svg"></iron-icon>-->
+                        </a>
+                        <a name="leaderboard" href="[[rootPath]]leaderboard">
+                            <iron-icon class="unselected" src="../images/menu/leaderboard-white.svg"></iron-icon>
+                            <!--<iron-icon class="selected" src="../images/menu/leaderboard-color.svg"></iron-icon>-->
+                        </a>
+                        <div class="actions">
+                            <a name="settings" href="[[rootPath]]settings">
+                                <iron-icon class="unselected" src="../images/menu/settings-white.svg"></iron-icon>
+                                <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
+                            </a>
+                            <a name="logout" on-click="logout()">
+                                <iron-icon class="unselected" src="../images/menu/logout-white.svg"></iron-icon>
+                                <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
+                            </a>
+                            <div class="profile-image"
+                                 style="background-image: url('../images/profile-image.jpg'); margin-top: 5px;">
+                            </div>
+                        </div>
+                    </iron-selector>
+                </div>
             </app-drawer>
             <!-- Main content -->
             <app-header-layout has-scrolling-region>
@@ -205,6 +251,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 } else {
                     user.setAttribute('style', 'display: none');
                 }
+            }
+
+            logout() {
+                return this.$.auth.signOut();
             }
 
             _showPage404() {

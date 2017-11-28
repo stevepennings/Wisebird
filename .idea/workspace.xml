@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6dc8af37-806f-46be-9f1e-98f42e5286cc" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/wisebird-element-login.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/my-app.html" afterPath="$PROJECT_DIR$/src/my-app.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shared-styles.html" afterPath="$PROJECT_DIR$/src/shared-styles.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-homescreen.html" afterPath="$PROJECT_DIR$/src/wisebird-page-homescreen.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-login.html" afterPath="$PROJECT_DIR$/src/wisebird-page-login.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,24 +16,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="my-app.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="my-app.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/my-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="128" column="25" lean-forward="true" selection-start-line="128" selection-start-column="25" selection-end-line="128" selection-end-column="25" />
+            <state relative-caret-position="609">
+              <caret line="154" column="63" lean-forward="false" selection-start-line="154" selection-start-column="63" selection-end-line="154" selection-end-column="63" />
+              <folding>
+                <element signature="n#style#0;n#iron-image#0;n#app-toolbar#0;n#div#0;n#app-drawer#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#iron-selector#0;n#div#0;n#app-drawer#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shared-styles.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/shared-styles.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wisebird-page-homescreen.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wisebird-page-homescreen.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wisebird-page-homescreen.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+            <state relative-caret-position="337">
+              <caret line="80" column="17" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
               <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#paper-card#0;n#div#1;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wisebird-page-login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/wisebird-page-login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="652">
+              <caret line="142" column="13" lean-forward="false" selection-start-line="142" selection-start-column="13" selection-end-line="142" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -54,8 +76,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/my-app.html" />
+        <option value="$PROJECT_DIR$/src/wisebird-page-login.html" />
         <option value="$PROJECT_DIR$/src/wisebird-page-homescreen.html" />
+        <option value="$PROJECT_DIR$/src/shared-styles.html" />
+        <option value="$PROJECT_DIR$/src/my-app.html" />
       </list>
     </option>
   </component>
@@ -227,12 +251,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1511857112239</updated>
-      <workItem from="1511857121676" duration="2669000" />
+      <workItem from="1511857121676" duration="12146000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2669000" />
+    <option name="totallyTimeSpent" value="12146000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
@@ -277,20 +301,41 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/my-app.html">
+    <entry file="file://$PROJECT_DIR$/src/wisebird-page-login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="128" column="25" lean-forward="true" selection-start-line="128" selection-start-column="25" selection-end-line="128" selection-end-column="25" />
+        <state relative-caret-position="652">
+          <caret line="142" column="13" lean-forward="false" selection-start-line="142" selection-start-column="13" selection-end-line="142" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wisebird-page-homescreen.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="105" column="0" lean-forward="true" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+        <state relative-caret-position="337">
+          <caret line="80" column="17" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
           <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#paper-card#0;n#div#1;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shared-styles.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/my-app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="154" column="63" lean-forward="false" selection-start-line="154" selection-start-column="63" selection-end-line="154" selection-end-column="63" />
+          <folding>
+            <element signature="n#style#0;n#iron-image#0;n#app-toolbar#0;n#div#0;n#app-drawer#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#iron-selector#0;n#div#0;n#app-drawer#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
