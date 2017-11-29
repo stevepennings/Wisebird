@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="wisebird-course-card">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-card {
+                width: 324px;
+                margin-right: 16px;
+                margin-bottom: 16px;
+            }
+        </style>
+
+        <paper-card heading="Dutch" image="../../images/dutch-course.svg" class="white" style="margin-bottom:8px;">
+            <div class="card-actions">
+                <paper-button>Continue</paper-button>
+                <paper-button>Explore</paper-button>
+            </div>
+        </paper-card>
+
+    </template>
+    <script>
+        /** @polymerElement */
+        class CourseCard extends Polymer.Element {
+            static get is() {
+                return 'wisebird-course-card';
+            }
+
+            static get properties() {
+                return {};
+            }
+
+        }
+
+        window.customElements.define(CourseCard.is, CourseCard);
+    </script>
+</dom-module>
