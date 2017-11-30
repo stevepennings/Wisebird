@@ -8,7 +8,6 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -26,13 +25,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="my-icons.html">
 
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-
-<link rel="lazy-import" href="wisebird-page-homescreen.html">
-<link rel="lazy-import" href="wisebird-page-leaderboard.html">
-<link rel="lazy-import" href="wisebird-page-settings.html">
-<link rel="lazy-import" href="wisebird-page-login.html">
-<link rel="lazy-import" href="wisebird-page-view404.html">
-
 
 <dom-module id="my-app">
     <template>
@@ -70,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app-header {
                 --paper-toolbar-height: 48px;
                 background: linear-gradient(to right, #00b0ff, #3a7bd5);
-                color: #fff;
+                color: #fafafa;
             }
 
             app-header paper-icon-button {
@@ -133,7 +125,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-drawer-layout fullbleed narrow="{{narrow}}">
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" id="user">
-                <div class="menu">
+                <div class="menu" id="user">
                     <app-toolbar>
                         <iron-image style="width:36px; height:36px;" sizing="contain"
                                     src="../images/wisebird-emblem.svg"></iron-image>

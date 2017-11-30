@@ -20,7 +20,8 @@
     "polymerfire": "firebase/polymerfire#^2.2.1",
     "iron-image": "PolymerElements/iron-image#^2.1.2",
     "paper-card": "PolymerElements/paper-card#^2.0.0",
-    "paper-fab": "PolymerElements/paper-fab#^2.0.0"
+    "paper-fab": "PolymerElements/paper-fab#^2.0.0",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#^2.0.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"
