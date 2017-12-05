@@ -24,6 +24,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="my-icons.html">
 
+<link rel="import" href="wisebird-page-courseoverview.html">
+
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
 <dom-module id="my-app">
@@ -177,6 +179,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <wisebird-page-homescreen name="homescreen"></wisebird-page-homescreen>
                     <wisebird-page-leaderboard name="leaderboard"></wisebird-page-leaderboard>
                     <wisebird-page-settings name="settings"></wisebird-page-settings>
+                    <wisebird-page-courseoverview name="courseoverview"></wisebird-page-courseoverview>
                     <wisebird-page-login name="login"></wisebird-page-login>
                     <wisebird-page-view404 name="view404"></wisebird-page-view404>
                 </iron-pages>
@@ -214,6 +217,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 return [
                     '_routePageChanged(routeData.page)',
                 ];
+            }
+
+            constructor() {
+                super();
+                this.addEventListener('requestChangePage', this._pageChanged);
             }
 
             _routePageChanged(page) {

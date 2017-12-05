@@ -17,7 +17,7 @@
 
         <paper-card heading="Dutch" image="../../images/dutch-course.svg" class="white" style="margin-bottom:8px;">
             <div class="card-actions">
-                <paper-button>Continue</paper-button>
+                <paper-button on-tap="_selectCourse">Continue</paper-button>
                 <paper-button>Explore</paper-button>
             </div>
         </paper-card>
@@ -34,6 +34,13 @@
                 return {};
             }
 
+            _selectCourse() {
+                this.dispatchEvent(new CustomEvent('requestChangePage', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {route: '/courseoverview/'},
+                }));
+            }
         }
 
         window.customElements.define(CourseCard.is, CourseCard);

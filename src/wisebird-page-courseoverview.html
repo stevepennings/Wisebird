@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="wisebird-page-courseoverview">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+
+                padding: 10px;
+            }
+        </style>
+
+        <h1>Course overview</h1>
+
+    </template>
+
+    <script>
+        class courseOverview extends Polymer.Element {
+            static get is() {
+                return 'wisebird-page-courseoverview';
+            }
+
+            static get properties() {
+                return {};
+            }
+        }
+
+        window.customElements.define(courseOverview.is, courseOverview);
+    </script>
+</dom-module>
