@@ -1,0 +1,22 @@
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="wisebird-page-chapter">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+        </style>
+
+    </template>
+
+    <script>
+        class chapter extends Polymer.Element {
+            static get is() {
+                return 'wisebird-page-chapter';
+            }
+        }
+
+        window.customElements.define(chapter.is, chapter);
+    </script>
+</dom-module>

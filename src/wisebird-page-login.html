@@ -131,15 +131,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         type: Object,
                         notify: true,
                     },
+                    userActive: {
+                        type: Boolean,
+                        value: false,
+                        notify: true,
+                    },
                 };
             }
 
             login() {
                 return this.$.auth.signInWithPopup();
-            }
-
-            logout() {
-                return this.$.auth.signOut();
             }
         }
 

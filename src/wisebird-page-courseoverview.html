@@ -7,11 +7,94 @@
             :host {
                 display: block;
 
-                padding: 10px;
+                padding: 16px;
+            }
+
+            .content {
+                margin: 0 auto;
+                width: 100%;
+                max-width: 580px;
+                height: 500px;
+            }
+
+            .half-row {
+                margin-top: 10px;
+                float: left;
+                width: 49%;
+            }
+
+            .row {
+                width: 100%;
+            }
+
+            .egg {
+                width: 66px;
+                height: 100px;
+                margin-left: 12px;
+                margin-right: 12px;
+            }
+
+            .unavailable {
+                opacity: 0.12;
             }
         </style>
 
-        <h1>Course overview</h1>
+        <div class="content" style="text-align: center;">
+            <div class="row">
+                <iron-image class="egg" sizing="contain" on-tap="_selectChapter"
+                            src="../images/course-egg-fill.svg"></iron-image>
+                <br>
+                <paper-button on-tap="_selectChapter">Chapter 1</paper-button>
+            </div>
+            <div class="row">
+                <div class="half-row">
+                    <iron-image class="egg unavailable" sizing="contain"
+                                src="../images/course-egg-fill.svg"></iron-image>
+                    <div class="unavailable"><br>Chapter 2</div>
+                </div>
+                <div class="half-row">
+                    <iron-image class="egg unavailable" sizing="contain"
+                                src="../images/course-egg-fill.svg"></iron-image>
+                    <div class="unavailable"><br>Chapter 3</div>
+                </div>
+            </div>
+            <div class="row unavailable">
+            <iron-image class="egg" sizing="contain"
+                        src="../images/course-egg-fill.svg"></iron-image>
+            <br>
+            Chapter 4
+        </div>
+            <div class="row unavailable">
+                <div class="half-row">
+                    <iron-image class="egg" sizing="contain"
+                                src="../images/course-egg-fill.svg"></iron-image>
+                    <br>Chapter 5
+                </div>
+                <div class="half-row">
+                    <iron-image class="egg" sizing="contain"
+                                src="../images/course-egg-fill.svg"></iron-image>
+                    <br>Chapter 6
+                </div>
+            </div>
+            <div class="row unavailable">
+                <iron-image class="egg" sizing="contain"
+                            src="../images/course-egg-fill.svg"></iron-image>
+                <br>
+                Chapter 7
+            </div>
+            <div class="row unavailable">
+                <div class="half-row">
+                    <iron-image class="egg" sizing="contain"
+                                src="../images/course-egg-fill.svg"></iron-image>
+                    <br>Chapter 8
+                </div>
+                <div class="half-row">
+                    <iron-image class="egg" sizing="contain"
+                                src="../images/course-egg-fill.svg"></iron-image>
+                    <br>Chapter 9
+                </div>
+            </div>
+        </div>
 
     </template>
 
@@ -23,6 +106,14 @@
 
             static get properties() {
                 return {};
+            }
+
+            _selectChapter() {
+                this.dispatchEvent(new CustomEvent('requestChangePage', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {route: '/chapter'},
+                }));
             }
         }
 

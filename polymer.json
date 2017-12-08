@@ -3,10 +3,11 @@
   "shell": "src/my-app.html",
   "fragments": [
     "src/wisebird-page-homescreen.html",
+    "src/wisebird-page-courseoverview.html",
+    "src/wisebird-page-chapter.html",
     "src/wisebird-page-leaderboard.html",
     "src/wisebird-page-settings.html",
     "src/wisebird-page-login.html",
-    "src/wisebird-page-courseoverview.html",
     "src/wisebird-page-view404.html"
   ],
   "sources": [

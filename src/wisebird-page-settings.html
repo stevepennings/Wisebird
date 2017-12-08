@@ -95,7 +95,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div class="column-content">Change profilepicture</div>
             </div>
             <div class="signout">
-                <paper-button raised class="sign-out google">
+                <paper-button raised class="sign-out google" on-tap="_logout">
                     <div class="sign-out-container">
                         <img class="sign-out-icon" src="../images/google-logo.svg"/>
                         <span class="logout-text">LOGOUT</span>
@@ -110,6 +110,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         class settings extends Polymer.Element {
             static get is() {
                 return 'wisebird-page-settings';
+            }
+
+            static get properties() {
+                return {};
+            }
+
+            _logout() {
+                this.dispatchEvent(new CustomEvent('requestLogout', {
+                    bubbles: true,
+                    composed: true,
+                }));
             }
         }
 
