@@ -26,6 +26,7 @@
                 --app-primary-color: #00b0ff;
                 --app-secondary-color: black;
                 --app-drawer-width: 64px;
+                --app-header-background-front-layer:
                 display: block;
                 height: 100vh;
             }
@@ -132,7 +133,7 @@
                                 <iron-icon class="unselected" src="../images/menu/settings-white.svg"></iron-icon>
                                 <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
                             </a>
-                            <a name="logout" href="[[rootPath]]login">
+                            <a name="logout" href="[[rootPath]]login" on-tap="_logout">
                                 <iron-icon class="unselected" src="../images/menu/logout-white.svg"></iron-icon>
                                 <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
                             </a>
