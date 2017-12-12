@@ -1,0 +1,93 @@
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<dom-module id="wisebird-mcquestion">
+    <template>
+        <style>
+            :host {
+                display: block;
+                --paper-checkbox-unchecked-background-color: #e0e0e0;
+                --paper-checkbox-unchecked-color: #e0e0e0;
+                --paper-checkbox-ink-size: 0px;
+                --paper-checkbox-checked-color: var(--paper-blue-500);
+                --paper-checkbox-checked-ink-color: var(--paper-blue-500);
+                --paper-checkbox-size: 16px;
+            }
+
+            paper-card {
+                width: 150px;
+                margin-right: 4px;
+                margin-left: 4px;
+                margin-bottom: 16px;
+            }
+
+            .content {
+                margin: 0 auto;
+                width: 100%;
+                max-width: 580px;
+                height: 500px;
+            }
+
+            .text-align{
+                text-align: left;
+                vertical-align: middle;
+            }
+
+            .answer{
+                font-size: 14px;
+                font-weight: 400;
+                opacity: 0.87;
+            }
+        </style>
+
+        <div class="content">
+            <div class="horizontal">
+                <paper-card image="https://www.ouderwetsewinkel.nl/pub/media/catalog/product/cache/75eed2686e01eb22cb4050b2f40ddf97/g/e/gele-klompen_22.jpg" alt="Trip" class="white">
+                    <div class="card-actions horizontal justified text-align">
+                        <paper-checkbox noink>
+                            <div class="answer">Klompen</div>
+                        </paper-checkbox>
+                    </div>
+                </paper-card>
+                <paper-card image="http://foundus.si/wp-content/uploads/2017/06/vintage-tulip-white-marble-table-1-550x550.jpg" alt="Travel" class="white">
+                    <div class="card-actions horizontal justified text-align">
+                        <paper-checkbox noink>
+                            <div class="answer">Tafel</div>
+                        </paper-checkbox>
+                    </div>
+                </paper-card>
+            </div>
+            <div class="horizontal">
+                <paper-card image="https://02f0a56ef46d93f03c90-22ac5f107621879d5667e0d7ed595bdb.ssl.cf2.rackcdn.com/sites/114/photos/31219/amazon-parrot-sm20130828-28278-e2pcik-0_960x.jpg" alt="Trip" class="white">
+                    <div class="card-actions horizontal justified text-align">
+                        <paper-checkbox noink>
+                            <div class="answer">Papegaai</div>
+                        </paper-checkbox>
+                    </div>
+                </paper-card>
+                <paper-card image="http://jamestownhistoricalsociety.org/wp-content/uploads/2015/04/windmill-full-sail.jpg" alt="Travel" class="white">
+                    <div class="card-actions horizontal justified text-align">
+                        <paper-checkbox noink>
+                            <div class="answer">Windmolen</div>
+                        </paper-checkbox>
+                    </div>
+                </paper-card>
+            </div>
+        </div>
+    </template>
+    <script>
+        /** @polymerElement */
+        class mcQuestion extends Polymer.Element {
+            static get is() {
+                return 'wisebird-mcquestion';
+            }
+
+            static get properties() {
+                return {};
+            }
+        }
+
+        window.customElements.define(mcQuestion.is, mcQuestion);
+    </script>
+</dom-module>

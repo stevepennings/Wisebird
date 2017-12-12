@@ -1,12 +1,49 @@
 <link rel="import" href="shared-styles.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+
+<link rel="import" href="elements/wisebird-mcquestion.html">
 
 <dom-module id="wisebird-page-chapter">
     <template>
         <style include="shared-styles">
             :host {
                 display: block;
+                text-align: center;
+            }
+
+            .question{
+                font-size: 22px;
+                font-weight: 500;
+                opacity: 0.87;
+                margin-top: 32px;
+                margin-bottom: 16px;
+            }
+
+            paper-fab{
+                --paper-fab-background: linear-gradient(to right, #ff5e62, #ff9966);
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
             }
         </style>
+
+        <div class="question">Which picture shows a 'table'?</div>
+
+        <wisebird-mcquestion></wisebird-mcquestion>
+
+        <!--<template is="dom-repeat">-->
+            <!--<template is="dom-if">-->
+                <!--&lt;!&ndash;element&ndash;&gt;-->
+            <!--</template>-->
+            <!--<template is="dom-if">-->
+                <!--&lt;!&ndash;element&ndash;&gt;-->
+            <!--</template>-->
+            <!--<template is="dom-if">-->
+                <!--&lt;!&ndash;element&ndash;&gt;-->
+            <!--</template>-->
+        <!--</template>-->
+
+        <paper-fab src="../images/add_white.svg"></paper-fab>
 
     </template>
 
