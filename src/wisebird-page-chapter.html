@@ -1,5 +1,7 @@
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 
 <link rel="import" href="elements/wisebird-mcquestion.html">
 
@@ -8,10 +10,14 @@
         <style include="shared-styles">
             :host {
                 display: block;
+                --paper-toast-background-color: #fff;
+            }
+
+            .content{
                 text-align: center;
             }
 
-            .question{
+            .question {
                 font-size: 22px;
                 font-weight: 500;
                 opacity: 0.87;
@@ -19,38 +25,61 @@
                 margin-bottom: 16px;
             }
 
-            paper-fab{
+            paper-fab {
+                --paper-fab-keyboard-focus-background: linear-gradient(to right, #ff5e62, #ff9966);
                 --paper-fab-background: linear-gradient(to right, #ff5e62, #ff9966);
                 position: fixed;
                 bottom: 30px;
                 right: 30px;
             }
+
+            paper-toast{
+                margin-left: 0px;
+                min-width: 50px;
+                width: 220px;
+                border-radius: 0px 10px 10px 0px;
+                text-align: right;
+            }
         </style>
 
-        <div class="question">Which picture shows a 'table'?</div>
+        <div class="content">
+            <div class="question">Which picture shows a 'table'?</div>
 
-        <wisebird-mcquestion></wisebird-mcquestion>
+            <wisebird-mcquestion></wisebird-mcquestion>
 
-        <!--<template is="dom-repeat">-->
+            <!--<template is="dom-repeat">-->
             <!--<template is="dom-if">-->
-                <!--&lt;!&ndash;element&ndash;&gt;-->
+            <!--&lt;!&ndash;element&ndash;&gt;-->
             <!--</template>-->
             <!--<template is="dom-if">-->
-                <!--&lt;!&ndash;element&ndash;&gt;-->
+            <!--&lt;!&ndash;element&ndash;&gt;-->
             <!--</template>-->
             <!--<template is="dom-if">-->
-                <!--&lt;!&ndash;element&ndash;&gt;-->
+            <!--&lt;!&ndash;element&ndash;&gt;-->
             <!--</template>-->
-        <!--</template>-->
+            <!--</template>-->
 
-        <paper-fab src="../images/add_white.svg"></paper-fab>
+        </div>
 
+        <paper-fab on-click="openToast" src="../images/check.svg"></paper-fab>
+        <paper-toast raised id="toast">
+            <iron-image style="width:40px; height:40px;" sizing="contain"
+                        src="../images/thumb_up.svg"></iron-image>
+        </paper-toast>
     </template>
 
     <script>
         class chapter extends Polymer.Element {
             static get is() {
                 return 'wisebird-page-chapter';
+            }
+
+            static get properties() {
+                return {};
+            }
+
+            openToast() {
+                this.$.toast.open();
             }
         }
 
