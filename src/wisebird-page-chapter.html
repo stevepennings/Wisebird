@@ -2,6 +2,8 @@
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="elements/wisebird-mcquestion.html">
 
@@ -13,7 +15,7 @@
                 --paper-toast-background-color: #fff;
             }
 
-            .content{
+            .content {
                 text-align: center;
             }
 
@@ -21,7 +23,7 @@
                 font-size: 22px;
                 font-weight: 500;
                 opacity: 0.87;
-                margin-top: 32px;
+                margin-top: 24px;
                 margin-bottom: 16px;
             }
 
@@ -31,19 +33,44 @@
                 position: fixed;
                 bottom: 30px;
                 right: 30px;
+                z-index: 200;
             }
 
-            paper-toast{
-                margin-left: 0px;
-                min-width: 50px;
-                width: 220px;
-                border-radius: 0px 10px 10px 0px;
-                text-align: right;
+            paper-toast {
+                padding: 0;
+                height: 100px;
+            }
+
+            .backgroundToast {
+                background: linear-gradient(to right, #3ad59d, #5fffa4);
+                height: 100%;
+                width: 100%;
+                vertical-align: middle;
+                text-align: center;
+            }
+
+            .footer {
+                position: absolute;
+                width: 100%;
+                height: 100px;
+                background-color: #eeeeee;
+                bottom: 0;
+            }
+
+            .info-logo{
+                height: 48px;
+                width: 48px;
+                margin-top: 26px;
+            }
+
+            paper-tooltip{
+                bottom: 100px;
             }
         </style>
 
         <div class="content">
-            <div class="question">Which picture shows a 'table'?</div>
+
+            <div class="question">[[question]]</div>
 
             <wisebird-mcquestion></wisebird-mcquestion>
 
@@ -61,11 +88,19 @@
 
         </div>
 
+        <div class="footer" style="text-align: center;">
+            <iron-icon id="info" class="info-logo" tabindex="0" src="../images/info.svg"></iron-icon>
+            <div ></div>
+            <paper-tooltip for="info" position="top" offset="0">halp I am trapped in a tooltip</paper-tooltip>
+        </div>
         <paper-fab on-click="openToast" src="../images/check.svg"></paper-fab>
-        <paper-toast raised id="toast">
-            <iron-image style="width:40px; height:40px;" sizing="contain"
-                        src="../images/thumb_up.svg"></iron-image>
+        <paper-toast raised id="toast" class="fit-bottom" duration="0">
+            <div class="backgroundToast">
+                <iron-image style="width:75px; height:75px; margin-top: 12.5px;" sizing="contain"
+                            src="../images/thumb_up.svg"></iron-image>
+            </div>
         </paper-toast>
+
     </template>
 
     <script>
@@ -75,7 +110,12 @@
             }
 
             static get properties() {
-                return {};
+                return {
+                    question: {
+                        type: String,
+                        value: 'Which picture shows a \'table\'?',
+                    },
+                };
             }
 
             openToast() {
