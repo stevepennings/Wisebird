@@ -25,7 +25,8 @@
     "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1",
     "paper-toast": "PolymerElements/paper-toast#^2.0.0",
     "paper-radio-button": "PolymerElements/paper-radio-button#^2.0.0",
-    "paper-tooltip": "PolymerElements/paper-tooltip#^2.0.1"
+    "paper-tooltip": "PolymerElements/paper-tooltip#^2.0.1",
+    "paper-radio-group": "PolymerElements/paper-radio-group#^2.0.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"
