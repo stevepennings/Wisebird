@@ -6,6 +6,7 @@
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="elements/wisebird-mcquestion.html">
+<link rel="import" href="elements/wisebird-openquestion.html">
 
 <dom-module id="wisebird-page-chapter">
     <template>
@@ -13,18 +14,19 @@
             :host {
                 display: block;
                 --paper-toast-background-color: #fff;
-            }
-
-            .content {
                 text-align: center;
             }
 
+            .content {
+                margin: 0 auto;
+                max-width: 580px;
+            }
+
             .question {
-                font-size: 22px;
-                font-weight: 500;
+                font-size: 24px;
+                font-weight: 600;
                 opacity: 0.87;
                 margin-top: 24px;
-                margin-bottom: 16px;
             }
 
             paper-fab {
@@ -76,7 +78,8 @@
 
             <div class="question">[[question]]</div>
 
-            <wisebird-mcquestion></wisebird-mcquestion>
+            <wisebird-openquestion></wisebird-openquestion>
+            <!--<wisebird-mcquestion></wisebird-mcquestion>-->
 
             <!--<template is="dom-repeat">-->
             <!--<template is="dom-if">-->
@@ -128,7 +131,7 @@
                 return {
                     question: {
                         type: String,
-                        value: 'Which picture shows a \'table\'?',
+                        value: 'Write this in english',
                     },
                 };
             }

@@ -1,0 +1,68 @@
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+
+<dom-module id="wisebird-openquestion">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .description {
+                font-size: 18px;
+                font-style: italic;
+                font-weight: 400;
+                opacity: 0.87;
+            }
+
+            iron-autogrow-textarea {
+                font-size: 16px;
+                font-weight: 500;
+                opacity: 0.87;
+                width: 80%;
+                max-width: 580px;
+                margin-top: 24px;
+                margin-left: 12px;
+                margin-right: 12px;
+                text-align: left;
+                border-radius: 10px;
+                border-style: solid;
+                border-width: 2px;
+                border-color: #e0e0e0;
+                background-color: #ffffff;
+            }
+        </style>
+
+        <div class="description">Een man</div>
+
+        <iron-autogrow-textarea value="{{answer}}" rows="8" placeholder="Type your answer in English"></iron-autogrow-textarea>
+    </template>
+    <script>
+        /** @polymerElement */
+        class openQuestion extends Polymer.Element {
+            static get is() {
+                return 'wisebird-openquestion';
+            }
+
+            static get properties() {
+                return {
+                    answer: {
+                        type: String,
+                        value: '',
+                        observer: 'answerFilled',
+                    },
+                };
+            }
+
+            static get observers() {
+                return [
+                    'answerFilled(answer)',
+                ];
+            }
+
+            answerFilled(answer){
+                console.log(answer);
+            }
+        }
+        window.customElements.define(openQuestion.is, openQuestion);
+    </script>
+</dom-module>
