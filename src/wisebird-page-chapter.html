@@ -49,6 +49,14 @@
                 text-align: center;
             }
 
+            .backgroundToastWrong {
+                background: linear-gradient(to left, #e53935, #e35d5b);
+                height: 100%;
+                width: 100%;
+                vertical-align: middle;
+                text-align: center;
+            }
+
             .footer {
                 position: absolute;
                 width: 100%;
@@ -57,13 +65,13 @@
                 bottom: 0;
             }
 
-            .info-logo{
+            .info-logo {
                 height: 48px;
                 width: 48px;
                 margin-top: 26px;
             }
 
-            paper-tooltip{
+            paper-tooltip {
                 bottom: 100px;
             }
         </style>
@@ -88,19 +96,30 @@
 
         </div>
 
+        <!--Info in footer-->
         <div class="footer" style="text-align: center;">
             <iron-icon id="info" class="info-logo" tabindex="0" src="../images/info.svg"></iron-icon>
-            <div ></div>
             <paper-tooltip for="info" position="top" offset="0">halp I am trapped in a tooltip</paper-tooltip>
         </div>
-        <paper-fab on-click="openToast" src="../images/check.svg"></paper-fab>
-        <paper-toast raised id="toast" class="fit-bottom" duration="0">
+
+        <!--Checks answer-->
+        <paper-fab on-click="_openToast" src="../images/check.svg"></paper-fab>
+
+        <!--Pop up for correct answer-->
+        <paper-toast raised id="correct" class="fit-bottom" duration="0">
             <div class="backgroundToast">
                 <iron-image style="width:75px; height:75px; margin-top: 12.5px;" sizing="contain"
                             src="../images/thumb_up.svg"></iron-image>
             </div>
         </paper-toast>
 
+        <!--Pop up for wrong answer-->
+        <paper-toast raised id="wrong" class="fit-bottom" duration="0">
+            <div class="backgroundToastWrong">
+                <iron-image style="width:75px; height:75px; margin-top: 12.5px;" sizing="contain"
+                            src="../images/thumb_down.svg"></iron-image>
+            </div>
+        </paper-toast>
     </template>
 
     <script>
@@ -118,8 +137,13 @@
                 };
             }
 
-            openToast() {
-                this.$.toast.open();
+            _openToast() {
+                var check = true;
+                if (check === true) {
+                    this.$.correct.open();
+                } else {
+                    this.$.wrong.open();
+                }
             }
         }
 
