@@ -7,6 +7,7 @@
 
 <link rel="import" href="elements/wisebird-mcquestion.html">
 <link rel="import" href="elements/wisebird-openquestion.html">
+<link rel="import" href="elements/wisebird-sentence.html">
 
 <dom-module id="wisebird-page-chapter">
     <template>
@@ -72,14 +73,19 @@
                 width: 48px;
                 margin-top: 26px;
             }
+
+            wisebird-mcquestion {
+                margin-top: 16px;
+            }
         </style>
 
         <div class="content">
 
             <div class="question">[[question]]</div>
 
-            <wisebird-openquestion></wisebird-openquestion>
+            <!--<wisebird-openquestion></wisebird-openquestion>-->
             <!--<wisebird-mcquestion></wisebird-mcquestion>-->
+            <wisebird-sentence></wisebird-sentence>
 
             <!--<template is="dom-repeat">-->
             <!--<template is="dom-if">-->
@@ -131,7 +137,7 @@
                 return {
                     question: {
                         type: String,
-                        value: 'Write this in english',
+                        value: 'Complete the sentence.',
                     },
                 };
             }

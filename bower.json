@@ -27,7 +27,9 @@
     "paper-radio-button": "PolymerElements/paper-radio-button#^2.0.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#^2.0.1",
     "paper-radio-group": "PolymerElements/paper-radio-group#^2.0.0",
-    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#^2.1.0"
+    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#^2.1.0",
+    "paper-input": "PolymerElements/paper-input#^2.0.5",
+    "iron-input": "PolymerElements/iron-input#^2.0.1"
   },
   "resolutions": {
     "polymer": "^2.0.0"

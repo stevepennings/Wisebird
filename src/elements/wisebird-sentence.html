@@ -1,0 +1,77 @@
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+
+<dom-module id="wisebird-sentence">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .sentence {
+                margin: 12px;
+                font-size: 18px;
+                font-weight: 400;
+                opacity: 0.87;
+            }
+
+            iron-input {
+                width: 120px;
+            }
+
+            input {
+                text-align: center;
+                width: 120px;
+                background-color: #fafafa;
+                border-style: none;
+                border-bottom: 2px solid #e0e0e0;
+                font-size: 18px;
+                font-weight: 600;
+                opacity: 0.87;
+            }
+
+            input:focus {
+                outline: none;
+            }
+        </style>
+
+        <div class="sentence">
+            Een
+            <iron-input bind-value="{{bindValue}}">
+                <input value="{{answer::input}}">
+            </iron-input>
+            drinkt cola op een bankje.
+        </div>
+
+
+    </template>
+    <script>
+        /** @polymerElement */
+        class sentence extends Polymer.Element {
+            static get is() {
+                return 'wisebird-sentence';
+            }
+
+            static get properties() {
+                return {
+                    answer: {
+                        type: String,
+                        value: '',
+                        observer: 'answerFilled',
+                    },
+                };
+            }
+
+            static get observers() {
+                return [
+                    'answerFilled(answer)',
+                ];
+            }
+
+            answerFilled(answer) {
+                //
+            }
+        }
+
+        window.customElements.define(sentence.is, sentence);
+    </script>
+</dom-module>
