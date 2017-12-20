@@ -77,15 +77,21 @@
             wisebird-mcquestion {
                 margin-top: 16px;
             }
+
+            paper-tooltip {
+                margin-left: 12px;
+                margin-right: 12px;
+            }
         </style>
 
         <div class="content">
-
-            <div class="question">[[question]]</div>
-
-            <!--<wisebird-openquestion></wisebird-openquestion>-->
+            <template is="dom-repeat" items="[[question]]" class="question">[[item.question]] answer: [[item.answer]]</template>
+            <wisebird-openquestion
+                    answer="{{answer}}">
+            </wisebird-openquestion>
+            {{answer}}
             <!--<wisebird-mcquestion></wisebird-mcquestion>-->
-            <wisebird-sentence></wisebird-sentence>
+            <!--<wisebird-sentence></wisebird-sentence>-->
 
             <!--<template is="dom-repeat">-->
             <!--<template is="dom-if">-->
@@ -104,11 +110,11 @@
         <!--Info in footer-->
         <div class="footer" style="text-align: center;">
             <iron-icon id="info" class="info-logo" tabindex="0" src="../images/info.svg"></iron-icon>
-            <paper-tooltip for="info" position="top" offset="50">halp I am trapped in a tooltip</paper-tooltip>
+            <paper-tooltip for="info" position="top" offset="40">{{tooltip}}</paper-tooltip>
         </div>
 
         <!--Checks answer-->
-        <paper-fab on-click="_openToast" src="../images/check.svg"></paper-fab>
+        <paper-fab on-click="_checkInput" src="../images/check.svg"></paper-fab>
 
         <!--Pop up for correct answer-->
         <paper-toast raised id="correct" class="fit-bottom" duration="0">
@@ -136,10 +142,62 @@
             static get properties() {
                 return {
                     question: {
+                        type: Array,
+                        value: [{
+                                question:
+                                    'Which one is the correct translation for the man?',
+                                answer: 'de man',
+                            },
+                            {
+                                question:
+                                    'Which one is the correct translation ' +
+                                    'for the woman?',
+                                answer: 'de vrouw',
+                            },
+                            {
+                                question:
+                                    'Which one is the correct translation for the boy?',
+                                answer: 'de jongen',
+                            },
+                            {
+                                question:
+                                    'What is the correct translation for the girl?',
+                                answer: 'het meisje',
+                            },
+                            {
+                                question:
+                                    'What is the correct translation for I am a woman?',
+                                answer: 'Ik ben een vrouw',
+                            },
+                            {
+                            question:
+                                'Which one is the correct translation for the child?',
+                                answer: 'het kind',
+                            }],
+                    },
+                    tooltip: {
                         type: String,
-                        value: 'Complete the sentence.',
+                        value: 'tooltip',
+                    },
+                    answer: {
+                        type: String,
+                        value: '',
                     },
                 };
+            }
+
+            constructor() {
+                super();
+                this.addEventListener('requestAnswer', this._checkAnswer);
+            }
+
+            _checkInput() {
+                this._verifyAnswer();
+                this._openToast();
+            }
+
+            _verifyAnswer() {
+                console.log('check answer');
             }
 
             _openToast() {

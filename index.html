@@ -86,6 +86,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- Load your application shell -->
     <link rel="import" href="src/my-app.html">
 
+    <!--Load firebase script. -->
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        let config = {
+            apiKey: 'AIzaSyC6Qsa0zD5AGK8W7iIVM2OiVnhrKmIkp5Y',
+            authDomain: 'wisebird-26f0e.firebaseapp.com',
+            databaseURL: 'https://wisebird-26f0e.firebaseio.com',
+            projectId: 'wisebird-26f0e',
+            storageBucket: 'wisebird-26f0e.appspot.com',
+            messagingSenderId: '268033523353',
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <!-- Add any global styles for body, document, etc. -->
     <style>
       body {

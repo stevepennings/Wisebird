@@ -48,19 +48,8 @@
                     answer: {
                         type: String,
                         value: '',
-                        observer: 'answerFilled',
                     },
                 };
-            }
-
-            static get observers() {
-                return [
-                    'answerFilled(answer)',
-                ];
-            }
-
-            answerFilled(answer) {
-                //
             }
         }
         window.customElements.define(openQuestion.is, openQuestion);
