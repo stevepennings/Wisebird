@@ -95,15 +95,15 @@
                 <template is="dom-repeat" items="[[question]]" class="question">
                     <div>
                         {{item.question}} answer: {{item.answer}}
-                        <template is="dom-if" if="{{openquestion}}">
+                        <template is="dom-if" if="[[isOpenQuestion(item)]]">
                             <wisebird-openquestion
                                     answer="{{answer}}">
                             </wisebird-openquestion>
                         </template>
-                        <template is="dom-if" if="{{mcquestion}}">
+                        <template is="dom-if" if="[[isMcQuestion(item)]]">
                             <wisebird-mcquestion></wisebird-mcquestion>
                         </template>
-                        <template is="dom-if" if="{{sentence}}">
+                        <template is="dom-if" if="[[isSentenceQuestion(item)]]">
                             <wisebird-sentence></wisebird-sentence>
                         </template>
                     </div>
@@ -213,21 +213,6 @@
                         type: Boolean,
                         value: false,
                     },
-                    questionType: {
-                        observer: '_observerQuestiontype',
-                    },
-                    openquestion: {
-                        type: Boolean,
-                        value: false,
-                    },
-                    mcquestion: {
-                        type: Boolean,
-                        value: false,
-                    },
-                    sentence: {
-                        type: Boolean,
-                        value: false,
-                    },
                 };
             }
 
@@ -235,26 +220,20 @@
                 super();
             }
 
-            static get observers() {
-                return [
-                    '_observerQuestiontype(type)',
-                ];
+
+            isOpenQuestion(question) {
+                if(question.type === 'openquestion') return true;
+                return false;
             }
 
-            _observerQuestiontype(type) {
-                switch (type) {
-                    case 'openquestion':
-                        this.openquestion = true;
-                        break;
-                    case 'mcquestion':
-                        this.mcquestion = true;
-                        break;
-                    case 'sentence':
-                        this.sentence = true;
-                        break;
-                    default:
-                }
-                this.questionType = i;
+            isMcQuestion(question) {
+                if(question.type === 'mcquestion') return true;
+                return false;
+            }
+
+            isSentenceQuestion(question) {
+                if(question.type === 'sentence') return true;
+                return false;
             }
 
             _verifyInput() {
