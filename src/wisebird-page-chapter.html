@@ -95,15 +95,20 @@
                 <template is="dom-repeat" items="[[question]]" class="question">
                     <div>
                         {{item.question}} answer: {{item.answer}}
-                        <wisebird-openquestion
-                                answer="{{answer}}">
-                        </wisebird-openquestion>
+                        <template is="dom-if" if="{{openquestion}}">
+                            <wisebird-openquestion
+                                    answer="{{answer}}">
+                            </wisebird-openquestion>
+                        </template>
+                        <template is="dom-if" if="{{mcquestion}}">
+                            <wisebird-mcquestion></wisebird-mcquestion>
+                        </template>
+                        <template is="dom-if" if="{{sentence}}">
+                            <wisebird-sentence></wisebird-sentence>
+                        </template>
                     </div>
                 </template>
             </iron-pages>
-
-            <!--<wisebird-mcquestion></wisebird-mcquestion>-->
-            <!--<wisebird-sentence></wisebird-sentence>-->
 
             <!--<template is="dom-repeat">-->
             <!--<template is="dom-if">-->
@@ -156,32 +161,44 @@
                     question: {
                         type: Array,
                         value: [{
+                            type: 'mcquestion',
                             question:
                                 'Which one is the correct translation for the man?',
                             answer: 'de man',
                         },
                             {
+                                type: 'mcquestion',
                                 question:
                                 'Which one is the correct translation ' +
                                 'for the woman?',
                                 answer: 'de vrouw',
                             },
                             {
+                                type: 'mcquestion',
                                 question:
                                     'Which one is the correct translation for the boy?',
                                 answer: 'de jongen',
                             },
                             {
+                                type: 'openquestion',
                                 question:
                                     'What is the correct translation for the girl?',
                                 answer: 'het meisje',
                             },
                             {
+                                type: 'openquestion',
                                 question:
                                     'What is the correct translation for I am a woman?',
                                 answer: 'Ik ben een vrouw',
                             },
                             {
+                                type: 'openquestion',
+                                question:
+                                    'Ik ___ een glas water?',
+                                answer: 'drink',
+                            },
+                            {
+                                type: 'openquestion',
                                 question:
                                 'Which one is the correct translation ' +
                                 'for the child?',
@@ -196,25 +213,59 @@
                         type: Boolean,
                         value: false,
                     },
+                    questionType: {
+                        observer: '_observerQuestiontype',
+                    },
+                    openquestion: {
+                        type: Boolean,
+                        value: false,
+                    },
+                    mcquestion: {
+                        type: Boolean,
+                        value: false,
+                    },
+                    sentence: {
+                        type: Boolean,
+                        value: false,
+                    },
                 };
             }
 
             constructor() {
                 super();
-                this.addEventListener('verifyAnswer', this._verifyAnswer);
+            }
+
+            static get observers() {
+                return [
+                    '_observerQuestiontype(type)',
+                ];
+            }
+
+            _observerQuestiontype(type) {
+                switch (type) {
+                    case 'openquestion':
+                        this.openquestion = true;
+                        break;
+                    case 'mcquestion':
+                        this.mcquestion = true;
+                        break;
+                    case 'sentence':
+                        this.sentence = true;
+                        break;
+                    default:
+                }
+                this.questionType = i;
             }
 
             _verifyInput() {
                 let check;
                 if (this.allowNext === true) {
-                    console.log(this.allowNext);
                     this.$.correct.close();
                     this._nextQuestion();
                     this.allowNext = false;
-                    this.shadowRoot.querySelector('paper-fab').src =
-                        '../images/check.svg';
+                    check = false;
+                    this._changeFab(check);
                 } else if (this.allowNext === false) {
-                    console.log(this.allowNext);
                     check = true;
                     this._changeFab(check);
                     this._openToast(check);
