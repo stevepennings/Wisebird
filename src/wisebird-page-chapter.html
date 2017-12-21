@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="elements/wisebird-mcquestion.html">
 <link rel="import" href="elements/wisebird-openquestion.html">
@@ -82,14 +83,25 @@
                 margin-left: 12px;
                 margin-right: 12px;
             }
+
+            wisebird-openquestion {
+                height: 100%;
+            }
         </style>
 
         <div class="content">
-            <template is="dom-repeat" items="[[question]]" class="question">[[item.question]] answer: [[item.answer]]</template>
-            <wisebird-openquestion
-                    answer="{{answer}}">
-            </wisebird-openquestion>
-            {{answer}}
+
+            <iron-pages selected="0">
+                <template is="dom-repeat" items="[[question]]" class="question">
+                    <div>
+                        {{item.question}} answer: {{item.answer}}
+                        <wisebird-openquestion
+                                answer="{{answer}}">
+                        </wisebird-openquestion>
+                    </div>
+                </template>
+            </iron-pages>
+
             <!--<wisebird-mcquestion></wisebird-mcquestion>-->
             <!--<wisebird-sentence></wisebird-sentence>-->
 
@@ -114,7 +126,7 @@
         </div>
 
         <!--Checks answer-->
-        <paper-fab on-click="_checkInput" src="../images/check.svg"></paper-fab>
+        <paper-fab on-click="_verifyInput" src="../images/check.svg"></paper-fab>
 
         <!--Pop up for correct answer-->
         <paper-toast raised id="correct" class="fit-bottom" duration="0">
@@ -144,14 +156,14 @@
                     question: {
                         type: Array,
                         value: [{
-                                question:
-                                    'Which one is the correct translation for the man?',
-                                answer: 'de man',
-                            },
+                            question:
+                                'Which one is the correct translation for the man?',
+                            answer: 'de man',
+                        },
                             {
                                 question:
-                                    'Which one is the correct translation ' +
-                                    'for the woman?',
+                                'Which one is the correct translation ' +
+                                'for the woman?',
                                 answer: 'de vrouw',
                             },
                             {
@@ -170,8 +182,9 @@
                                 answer: 'Ik ben een vrouw',
                             },
                             {
-                            question:
-                                'Which one is the correct translation for the child?',
+                                question:
+                                'Which one is the correct translation ' +
+                                'for the child?',
                                 answer: 'het kind',
                             }],
                     },
@@ -179,34 +192,58 @@
                         type: String,
                         value: 'tooltip',
                     },
-                    answer: {
-                        type: String,
-                        value: '',
+                    allowNext: {
+                        type: Boolean,
+                        value: false,
                     },
                 };
             }
 
             constructor() {
                 super();
-                this.addEventListener('requestAnswer', this._checkAnswer);
+                this.addEventListener('verifyAnswer', this._verifyAnswer);
             }
 
-            _checkInput() {
-                this._verifyAnswer();
-                this._openToast();
+            _verifyInput() {
+                let check;
+                if (this.allowNext === true) {
+                    console.log(this.allowNext);
+                    this.$.correct.close();
+                    this._nextQuestion();
+                    this.allowNext = false;
+                    this.shadowRoot.querySelector('paper-fab').src =
+                        '../images/check.svg';
+                } else if (this.allowNext === false) {
+                    console.log(this.allowNext);
+                    check = true;
+                    this._changeFab(check);
+                    this._openToast(check);
+                }
             }
 
-            _verifyAnswer() {
-                console.log('check answer');
+            _changeFab(check) {
+                const nextIcon = '../images/next.svg';
+                const checkIcon = '../images/check.svg';
+                if (check === true) {
+                    this.allowNext = true;
+                    this.shadowRoot.querySelector('paper-fab').src = nextIcon;
+                } else {
+                    this.allowNext = false;
+                    this.shadowRoot.querySelector('paper-fab').src = checkIcon;
+                }
             }
 
-            _openToast() {
-                var check = true;
+            _openToast(check) {
                 if (check === true) {
                     this.$.correct.open();
                 } else {
                     this.$.wrong.open();
                 }
+            }
+
+            _nextQuestion() {
+                let pages = this.shadowRoot.querySelector('iron-pages');
+                pages.selectNext();
             }
         }
 
