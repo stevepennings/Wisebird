@@ -34,7 +34,7 @@
 
         <div class="description">Een man</div>
 
-        <iron-autogrow-textarea value="{{answer}}" rows="8" placeholder="Type your answer in English"></iron-autogrow-textarea>
+        <iron-autogrow-textarea value="{{input}}" rows="8" placeholder="Type your answer in English"></iron-autogrow-textarea>
     </template>
     <script>
         /** @polymerElement */
@@ -45,8 +45,9 @@
 
             static get properties() {
                 return {
-                    answer: {
+                    input: {
                         type: String,
+                        notify: true,
                         value: '',
                     },
                 };

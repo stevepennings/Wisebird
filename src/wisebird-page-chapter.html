@@ -25,10 +25,12 @@
             }
 
             .question {
-                font-size: 24px;
+                font-size: 18px;
                 font-weight: 600;
                 opacity: 0.87;
-                margin-top: 24px;
+                margin-top: 16px;
+                margin-left: 12px;
+                margin-right: 12px;
             }
 
             paper-fab {
@@ -93,11 +95,11 @@
         <div class="content">
             <iron-pages selected="0">
                 <template is="dom-repeat" items="[[question]]" class="question">
-                    <div>
-                        {{item.question}} answer: {{item.answer}}
+                    <div class="question" value="{{item.answer}}" id="question">
+                        {{item.question}}
                         <template is="dom-if" if="[[isOpenQuestion(item)]]">
                             <wisebird-openquestion
-                                    answer="{{answer}}">
+                                    input="{{input}}">
                             </wisebird-openquestion>
                         </template>
                         <template is="dom-if" if="[[isMcQuestion(item)]]">
@@ -121,7 +123,7 @@
         <paper-fab on-click="_verifyInput" src="../images/check.svg"></paper-fab>
 
         <!--Pop up for correct answer-->
-        <paper-toast raised id="correct" class="fit-bottom" duration="0">
+        <paper-toast raised id="correct" class="fit-bottom">
             <div class="backgroundToast">
                 <iron-image style="width:75px; height:75px; margin-top: 12.5px;" sizing="contain"
                             src="../images/thumb_up.svg"></iron-image>
@@ -129,7 +131,7 @@
         </paper-toast>
 
         <!--Pop up for wrong answer-->
-        <paper-toast raised id="wrong" class="fit-bottom" duration="0">
+        <paper-toast raised id="wrong" class="fit-bottom">
             <div class="backgroundToastWrong">
                 <iron-image style="width:75px; height:75px; margin-top: 12.5px;" sizing="contain"
                             src="../images/thumb_down.svg"></iron-image>
@@ -147,12 +149,27 @@
                 return {
                     question: {
                         type: Array,
-                        value: [{
-                            type: 'mcquestion',
-                            question:
-                                'Which one is the correct translation for the man?',
-                            answer: 'de man',
-                        },
+                        value: [
+                            {
+                                type: 'openquestion',
+                                question:
+                                    'What is the correct translation for the girl?',
+                                answer: 'het meisje',
+                            },
+                            {
+                                type: 'mcquestion',
+                                question:
+                                'Which one is the correct translation for ' +
+                                'the table?',
+                                answer: 'de tafel',
+                                choices: [
+                                    {
+                                        mc1: 'de klompen',
+                                        mc2: 'de tafel',
+                                        mc3: 'de papegaai',
+                                        mc4: 'de windmolen',
+                                    }],
+                            },
                             {
                                 type: 'mcquestion',
                                 question:
@@ -165,12 +182,6 @@
                                 question:
                                     'Which one is the correct translation for the boy?',
                                 answer: 'de jongen',
-                            },
-                            {
-                                type: 'openquestion',
-                                question:
-                                    'What is the correct translation for the girl?',
-                                answer: 'het meisje',
                             },
                             {
                                 type: 'openquestion',
@@ -207,20 +218,24 @@
                 super();
             }
 
-
             isOpenQuestion(question) {
-                if(question.type === 'openquestion') return true;
+                if (question.type === 'openquestion') return true;
                 return false;
             }
 
             isMcQuestion(question) {
-                if(question.type === 'mcquestion') return true;
+                if (question.type === 'mcquestion') return true;
                 return false;
             }
 
             isSentenceQuestion(question) {
-                if(question.type === 'sentence') return true;
+                if (question.type === 'sentence') return true;
                 return false;
+            }
+
+            getInput() {
+                const e = this.shadowRoot.querySelector('wisebird-openquestion');
+                return e.input;
             }
 
             _verifyInput() {
@@ -232,9 +247,21 @@
                     check = false;
                     this._changeFab(check);
                 } else if (this.allowNext === false) {
-                    check = true;
+                    let input = this.getInput();
+                    let check = this._validate(input);
                     this._changeFab(check);
                     this._openToast(check);
+                }
+            }
+
+            _validate(input) {
+                let answer = this.shadowRoot.getElementById('question').value;
+                if (input === answer) {
+                    input = true;
+                    return input;
+                } else {
+                    input = false;
+                    return input;
                 }
             }
 
@@ -250,6 +277,7 @@
                 }
             }
 
+            // Show toast if the answer is correct or wrong
             _openToast(check) {
                 if (check === true) {
                     this.$.correct.open();
@@ -258,6 +286,7 @@
                 }
             }
 
+            // Navigates to next question if check is true
             _nextQuestion() {
                 let pages = this.shadowRoot.querySelector('iron-pages');
                 pages.selectNext();
