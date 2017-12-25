@@ -20,17 +20,26 @@
             }
 
             .content {
+                text-align: left;
                 margin: 0 auto;
                 max-width: 580px;
             }
 
             .question {
-                font-size: 18px;
+                font-size: 22px;
                 font-weight: 600;
                 opacity: 0.87;
                 margin-top: 16px;
                 margin-left: 12px;
                 margin-right: 12px;
+            }
+
+            .description {
+                font-size: 18px;
+                font-style: italic;
+                margin-left: 12px;
+                font-weight: 500;
+                opacity: 0.56;
             }
 
             paper-fab {
@@ -89,23 +98,44 @@
             wisebird-openquestion {
                 height: 100%;
             }
+
+            .fade-in {
+                opacity: 1;
+                animation-name: fadeInOpacity;
+                animation-iteration-count: 1;
+                animation-timing-function: ease-in;
+                animation-duration: 0.5s;
+            }
+
+            @keyframes fadeInOpacity {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
         </style>
 
         <!--Question section-->
         <div class="content">
             <iron-pages selected="0">
-                <template is="dom-repeat" items="[[question]]" class="question">
-                    <div class="question" value="{{item.answer}}" id="question">
-                        {{item.question}}
+                <template is="dom-repeat" items="[[question]]">
+                    <div id="question" value="{{item.answer}}" class="fade-in">
                         <template is="dom-if" if="[[isOpenQuestion(item)]]">
-                            <wisebird-openquestion
-                                    input="{{input}}">
+                            <div class="question">What is the correct translation for..</div>
+                            <div class="description">{{item.question}}</div>
+                            <wisebird-openquestion>
                             </wisebird-openquestion>
                         </template>
                         <template is="dom-if" if="[[isMcQuestion(item)]]">
-                            <wisebird-mcquestion></wisebird-mcquestion>
+                            <div style="text-align: center;">
+                                <div class="question">{{item.question}}</div>
+                                <wisebird-mcquestion></wisebird-mcquestion>
+                            </div>
                         </template>
                         <template is="dom-if" if="[[isSentenceQuestion(item)]]">
+                            <div class="question">{{item.question}}</div>
                             <wisebird-sentence></wisebird-sentence>
                         </template>
                     </div>
@@ -153,7 +183,7 @@
                             {
                                 type: 'openquestion',
                                 question:
-                                    'What is the correct translation for the girl?',
+                                    'the girl',
                                 answer: 'het meisje',
                             },
                             {
@@ -186,17 +216,17 @@
                             {
                                 type: 'openquestion',
                                 question:
-                                    'What is the correct translation for I am a woman?',
+                                    'I am a woman',
                                 answer: 'Ik ben een vrouw',
                             },
                             {
-                                type: 'openquestion',
+                                type: 'sentence',
                                 question:
                                     'Ik ___ een glas water?',
                                 answer: 'drink',
                             },
                             {
-                                type: 'openquestion',
+                                type: 'mcquestion',
                                 question:
                                 'Which one is the correct translation ' +
                                 'for the child?',
