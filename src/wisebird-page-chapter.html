@@ -120,8 +120,8 @@
         <!--Question section-->
         <div class="content">
             <iron-pages selected="0">
-                <template is="dom-repeat" items="[[question]]">
-                    <div id="question" value="{{item.answer}}" class="fade-in">
+                <template is="dom-repeat" items="[[questions]]">
+                    <div id="answer" value="{{item.answer}}" class="fade-in">
                         <template is="dom-if" if="[[isOpenQuestion(item)]]">
                             <div class="question">What is the correct translation for..</div>
                             <div class="description">{{item.question}}</div>
@@ -177,61 +177,9 @@
 
             static get properties() {
                 return {
-                    question: {
+                    questions: {
                         type: Array,
-                        value: [
-                            {
-                                type: 'openquestion',
-                                question:
-                                    'the girl',
-                                answer: 'het meisje',
-                            },
-                            {
-                                type: 'mcquestion',
-                                question:
-                                'Which one is the correct translation for ' +
-                                'the table?',
-                                answer: 'de tafel',
-                                choices: [
-                                    {
-                                        mc1: 'de klompen',
-                                        mc2: 'de tafel',
-                                        mc3: 'de papegaai',
-                                        mc4: 'de windmolen',
-                                    }],
-                            },
-                            {
-                                type: 'mcquestion',
-                                question:
-                                'Which one is the correct translation ' +
-                                'for the woman?',
-                                answer: 'de vrouw',
-                            },
-                            {
-                                type: 'mcquestion',
-                                question:
-                                    'Which one is the correct translation for the boy?',
-                                answer: 'de jongen',
-                            },
-                            {
-                                type: 'openquestion',
-                                question:
-                                    'I am a woman',
-                                answer: 'Ik ben een vrouw',
-                            },
-                            {
-                                type: 'sentence',
-                                question:
-                                    'Ik ___ een glas water?',
-                                answer: 'drink',
-                            },
-                            {
-                                type: 'mcquestion',
-                                question:
-                                'Which one is the correct translation ' +
-                                'for the child?',
-                                answer: 'het kind',
-                            }],
+                        value: [],
                     },
                     tooltip: {
                         type: String,
@@ -246,6 +194,7 @@
 
             constructor() {
                 super();
+                this.getChapter();
             }
 
             isOpenQuestion(question) {
@@ -264,28 +213,87 @@
             }
 
             getInput() {
-                const e = this.shadowRoot.querySelector('wisebird-openquestion');
-                return e.input;
+                let i = this.shadowRoot.querySelector('wisebird-openquestion').input;
+                return i;
             }
 
-            _verifyInput() {
-                let check;
-                if (this.allowNext === true) {
-                    this.$.correct.close();
+            getChapter() {
+                this.questions = [
+                    {
+                        type: 'openquestion',
+                        question:
+                            'the girl',
+                        answer: 'het meisje',
+                    },
+                    {
+                        type: 'mcquestion',
+                        question:
+                        'Which one is the correct translation for ' +
+                        'the table?',
+                        answer: 'de tafel',
+                        choices: [
+                            {
+                                mc1: 'de klompen',
+                                mc2: 'de tafel',
+                                mc3: 'de papegaai',
+                                mc4: 'de windmolen',
+                            }],
+                    },
+                    {
+                        type: 'mcquestion',
+                        question:
+                        'Which one is the correct translation ' +
+                        'for the woman?',
+                        answer: 'de vrouw',
+                    },
+                    {
+                        type: 'mcquestion',
+                        question:
+                            'Which one is the correct translation for the boy?',
+                        answer: 'de jongen',
+                    },
+                    {
+                        type: 'openquestion',
+                        question:
+                            'I am a woman',
+                        answer: 'Ik ben een vrouw',
+                    },
+                    {
+                        type: 'sentence',
+                        question:
+                            'Ik ___ een glas water?',
+                        answer: 'drink',
+                    },
+                    {
+                        type: 'mcquestion',
+                        question:
+                        'Which one is the correct translation ' +
+                        'for the child?',
+                        answer: 'het kind',
+                    }];
+                let questions = this.questions;
+                return questions;
+            }
+
+            _verifyInput(input) {
+                if (this.allowNext === false) {
+                    let input = this.getInput();
+                    this._validate(input);
+                    let check = this._validate(input);
+                    this._openToast(check);
+                    this._changeFab(check);
+                    this.allowNext = true;
+                } else {
+                    this._closeToast();
                     this._nextQuestion();
                     this.allowNext = false;
-                    check = false;
-                    this._changeFab(check);
-                } else if (this.allowNext === false) {
-                    let input = this.getInput();
-                    let check = this._validate(input);
-                    this._changeFab(check);
-                    this._openToast(check);
                 }
             }
 
             _validate(input) {
-                let answer = this.shadowRoot.getElementById('question').value;
+                let answer = this.shadowRoot.getElementById('answer').value;
+                answer = answer.toLowerCase();
+                input = input.toLowerCase();
                 if (input === answer) {
                     input = true;
                     return input;
@@ -295,31 +303,38 @@
                 }
             }
 
-            _changeFab(check) {
+//            _repeatQuestion() {
+//                let answer = this.shadowRoot.getElementById('answer').value;
+//                let question = this.shadowRoot.
+// getElementById('question').value;
+//            }
+
+            _changeFab() {
                 const nextIcon = '../images/next.svg';
-                const checkIcon = '../images/check.svg';
-                if (check === true) {
-                    this.allowNext = true;
-                    this.shadowRoot.querySelector('paper-fab').src = nextIcon;
-                } else {
-                    this.allowNext = false;
-                    this.shadowRoot.querySelector('paper-fab').src = checkIcon;
-                }
+                this.shadowRoot.querySelector('paper-fab').src = nextIcon;
             }
 
             // Show toast if the answer is correct or wrong
             _openToast(check) {
                 if (check === true) {
                     this.$.correct.open();
-                } else {
+                } else if (check === false) {
                     this.$.wrong.open();
                 }
             }
 
-            // Navigates to next question if check is true
+            _closeToast() {
+                this.$.correct.close();
+                this.$.wrong.close();
+            }
+
+            // Navigates to next questions if check is true
             _nextQuestion() {
+                const checkIcon = '../images/check.svg';
                 let pages = this.shadowRoot.querySelector('iron-pages');
                 pages.selectNext();
+                console.log(pages.indexOf());
+                this.shadowRoot.querySelector('paper-fab').src = checkIcon;
             }
         }
 

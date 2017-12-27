@@ -31,6 +31,10 @@
                 height: 100vh;
             }
 
+            #drawer {
+                visibility: var(--app-drawer-width)
+            }
+
             app-drawer-layout:not([narrow]) [drawer-toggle] {
                 display: none;
             }
@@ -106,7 +110,7 @@
         <app-drawer-layout fullbleed narrow="{{narrow}}">
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" class="drawer">
-                <div class="menu" id="drawer">
+                <div class="menu" id="menu">
                     <app-toolbar>
                         <iron-image style="width:36px; height:36px;" sizing="contain"
                                     src="../images/wisebird-emblem.svg"></iron-image>
@@ -215,6 +219,9 @@
                         }
                     } else {
                         // No user is signed in.
+                        this.dispatchEvent(new CustomEvent('requestChangePage', {
+                            detail: {route: '/login', replace: true},
+                        }));
                         console.log('No user');
                         this.user = null;
                     }
@@ -287,6 +294,8 @@
 //                this.loggedInUser = true;
                 var drawer = this.$.drawer;
                 if (this.user !== null) {
+                    this.updateStyles({'--app-drawer-width': '64px'});
+                    this.$.menu.setAttribute('style', 'display: visible');
                     drawer.setAttribute('style', 'display: visible');
                     this.shadowRoot.querySelector('app-drawer').open();
                     this.shadowRoot.querySelector('app-drawer').resetLayout();
@@ -294,6 +303,8 @@
                 } else {
                     drawer.setAttribute('style', 'display: none');
                     this.shadowRoot.querySelector('app-drawer').close();
+                    this.updateStyles({'--app-drawer-width': '0px'});
+                    this.$.menu.setAttribute('style', 'display: none');
                     this.shadowRoot.querySelector('app-drawer').resetLayout();
                 }
             }
@@ -302,6 +313,7 @@
                 firebase.auth().signOut().then(() => {
                     // Success
                     console.log('Logged out');
+                    this.set('route.path', '/login/');
                 }, (error) => {
                     // Error
                     console.log('Logout error: ' + error);
