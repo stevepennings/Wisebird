@@ -29,6 +29,7 @@
                 background-color: #fafafa;
                 display: block;
                 height: 100vh;
+
             }
 
             #drawer {
@@ -144,13 +145,26 @@
             <app-header-layout has-scrolling-region>
                 <app-header slot="header" condenses reveals effects="waterfall" id="drawer">
                     <app-toolbar>
-                        <paper-icon-button src="../images/menu.svg" drawer-toggle></paper-icon-button>
+                        <template is="dom-if" if="[[!chapter]]">
+                            <paper-icon-button src="../images/menu.svg" drawer-toggle></paper-icon-button>
+                        </template>
+                        <template is="dom-if" if="[[chapter]]">
+                            <paper-icon-button src="../images/close.svg" on-tap="_closeSession" style="padding: 10px; opacity: 0.87;"></paper-icon-button>
+                        </template>
+                        <template is="dom-if" if="[[courseoverview]]">
+                            <paper-icon-button src="../images/back.svg" on-tap="_goBack"></paper-icon-button>
+                        </template>
                         <div main-title></div>
-                        <paper-icon-button src="../images/coursepoints.svg"></paper-icon-button>
-                        18
-                        <paper-icon-button src="../images/studypoints.svg" style="float:right;"></paper-icon-button>
-                        9
-                        </div>
+                        <template is="dom-if" if="[[!chapter]]">
+                            <paper-icon-button src="../images/coursepoints.svg"></paper-icon-button>
+                            18
+                            <paper-icon-button src="../images/studypoints.svg" style="float:right;"></paper-icon-button>
+                            9
+                            </div>
+                        </template>
+                        <template is="dom-if" if="[[chapter]]">
+                            <div style="margin-right: 12px; font-size: 18px; font-weight: 600;">2 / 12</div>
+                        </template>
                     </app-toolbar>
                 </app-header>
 
@@ -190,6 +204,8 @@
                         notify: true,
                         observer: '_userSignedin',
                     },
+                    chapter: Boolean,
+                    courseoverview: Boolean,
                     routeData: Object,
                     subroute: String,
                     // This shouldn't be neccessary, but the Analyzer isn't picking up
@@ -231,6 +247,18 @@
                 this.addEventListener('requestLogout', this._logout);
             }
 
+            _closeSession() {
+                this.dispatchEvent(new CustomEvent('requestChangePage', {
+                    detail: {route: '/courseoverview', replace: true},
+                }));
+            }
+
+            _goBack() {
+                this.dispatchEvent(new CustomEvent('requestChangePage', {
+                    detail: {route: '/homescreen', replace: true},
+                }));
+            }
+
             _routePageChanged(page) {
                 // If no page was found in the route data, page will be an empty string.
                 // Default to 'homescreen' in that case.
@@ -252,11 +280,66 @@
                 var resolvedPageUrl = this.resolveUrl(
                     'wisebird-page-' + page + '.html'
                 );
+                this.pageLayout(page);
                 Polymer.importHref(
                     resolvedPageUrl,
                     null,
                     this._showPage404.bind(this),
                     true);
+            }
+
+            pageLayout(page) {
+                switch (page) {
+                    case 'chapter':
+                        this.$.drawer.setAttribute(
+                            'style', 'background: #fafafa; color: black;');
+                        this.updateStyles({'--app-drawer-width': '0px'});
+                        this.$.menu.setAttribute('style', 'display: none');
+                        this.shadowRoot.querySelector('app-drawer').resetLayout();
+                        this.chapter = true;
+                        this.courseoverview = false;
+                        console.log(this.chapter);
+                        break;
+                    case 'login':
+                        this.$.drawer.setAttribute(
+                            'style', 'display: none;');
+                        this.updateStyles({'--app-drawer-width': '0px'});
+                        this.$.menu.setAttribute('style', 'display: none');
+                        this.shadowRoot.querySelector('app-drawer').resetLayout();
+                        this.chapter = false;
+                        this.courseoverview = false;
+                        break;
+                    case 'courseoverview':
+                        this.$.drawer.setAttribute(
+                            'style', 'background: linear-gradient(' +
+                            'to right, #00b0ff, #3a7bd5);' +
+                            'color: #fafafa;');
+                        this.updateStyles({'--app-drawer-width': '0px'});
+                        this.$.menu.setAttribute('style', 'display: none');
+                        this.shadowRoot.querySelector('app-drawer').resetLayout();
+                        this.chapter = false;
+                        this.courseoverview = true;
+                        break;
+                    default:
+                        this.$.drawer.setAttribute(
+                            'style', 'background: linear-gradient(' +
+                            'to right, #00b0ff, #3a7bd5);' +
+                            'color: #fafafa;');
+                        this.updateStyles({'--app-drawer-width': '64px'});
+                        this.$.menu.setAttribute('style', 'display: visible');
+                        this.shadowRoot.querySelector('app-drawer').resetLayout();
+                        console.log(this.chapter);
+                        this.courseoverview = false;
+                        this.chapter = false;
+                }
+            }
+
+            _userSignedin(user) {
+                if (user !== null) {
+                    console.log('user is online');
+                } else {
+                    console.log('user is offline');
+                }
             }
 
             login(e) {
@@ -269,6 +352,9 @@
                         return;
                 }
                 firebase.auth().signInWithRedirect(provider);
+                this.dispatchEvent(new CustomEvent('requestChangePage', {
+                    detail: {route: '/homescreen', replace: true},
+                }));
                 firebase.auth().getRedirectResult().then((result) => {
                     if (result.credential) {
                         // This gives you a Google Access Token.
@@ -288,25 +374,6 @@
                     console.log('fireauth error: ' + errorCode
                         + ' ' + errorMessage + ' ' + email + ' ' + credential);
                 });
-            }
-
-            _userSignedin(user) {
-//                this.loggedInUser = true;
-                var drawer = this.$.drawer;
-                if (this.user !== null) {
-                    this.updateStyles({'--app-drawer-width': '64px'});
-                    this.$.menu.setAttribute('style', 'display: visible');
-                    drawer.setAttribute('style', 'display: visible');
-                    this.shadowRoot.querySelector('app-drawer').open();
-                    this.shadowRoot.querySelector('app-drawer').resetLayout();
-//                    this.set('route.path', '/homescreen/');
-                } else {
-                    drawer.setAttribute('style', 'display: none');
-                    this.shadowRoot.querySelector('app-drawer').close();
-                    this.updateStyles({'--app-drawer-width': '0px'});
-                    this.$.menu.setAttribute('style', 'display: none');
-                    this.shadowRoot.querySelector('app-drawer').resetLayout();
-                }
             }
 
             _logout() {
