@@ -149,7 +149,7 @@
                             <paper-icon-button src="../images/menu.svg" drawer-toggle></paper-icon-button>
                         </template>
                         <template is="dom-if" if="[[chapter]]">
-                            <paper-icon-button src="../images/close.svg" on-tap="_closeSession" style="padding: 10px; opacity: 0.87;"></paper-icon-button>
+                            <paper-icon-button src="../images/close.svg" on-tap="_handleDialog" style="padding: 10px; opacity: 0.87;"></paper-icon-button>
                         </template>
                         <template is="dom-if" if="[[courseoverview]]">
                             <paper-icon-button src="../images/back.svg" on-tap="_goBack"></paper-icon-button>
@@ -247,7 +247,7 @@
                 this.addEventListener('requestLogout', this._logout);
             }
 
-            _closeSession() {
+            _handleDialog() {
                 this.dispatchEvent(new CustomEvent('requestChangePage', {
                     detail: {route: '/courseoverview', replace: true},
                 }));
