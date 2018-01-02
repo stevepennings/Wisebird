@@ -252,7 +252,7 @@
             }
 
             _consoleLog() {
-                console.log(this.user.displayName);
+                console.log(this.user.uid);
             }
 
             _handleDialog() {
@@ -344,7 +344,7 @@
 
             _userSignedin(user) {
                 if (user !== null) {
-                    console.log('user is online');
+                    console.log(user.uid);
                 } else {
                     console.log('Cannot track progress');
                 }
