@@ -139,7 +139,7 @@
                                 <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
                             </a>
                             <div class="profile-image"
-                                 style="background-image: url('../images/profile-image.jpg'); margin-top: 5px;">
+                                 style="background-image: url('[[user.photoURL]]'); margin-top: 5px;">
                             </div>
                         </div>
                     </iron-selector>
@@ -161,9 +161,9 @@
                         <div main-title></div>
                         <template is="dom-if" if="[[!chapter]]">
                             <paper-icon-button src="../images/coursepoints.svg"></paper-icon-button>
-                            18
+                            [[chapterScore]]
                             <paper-icon-button src="../images/studypoints.svg" style="float:right;"></paper-icon-button>
-                            9
+                            [[questionScore]]
                             </div>
                         </template>
                         <template is="dom-if" if="[[chapter]]">
@@ -207,6 +207,14 @@
                         value: null,
                         notify: true,
                         observer: '_userSignedin',
+                    },
+                    chapterScore: {
+                        type: Number,
+                        value: 0,
+                    },
+                    questionScore: {
+                        type: Number,
+                        value: 0,
                     },
                     chapter: Boolean,
                     courseoverview: Boolean,
@@ -334,7 +342,7 @@
                             'to right, #00b0ff, #3a7bd5);' +
                             'color: #fafafa;');
                         this.updateStyles({'--app-drawer-width': '64px'});
-                        this.$.menu.setAttribute('style', 'display: visible');
+                        this.$.menu.setAttribute('style', 'display: block');
                         this.shadowRoot.querySelector('app-drawer').resetLayout();
                         console.log(this.chapter);
                         this.courseoverview = false;

@@ -12,25 +12,56 @@
                 display: block;
             }
 
-            .content{
-                margin:16px;
+            .content {
+                margin: 16px;
             }
 
-            paper-fab{
-            	--paper-fab-background: linear-gradient(to right, #ff5e62, #ff9966);
-            	position: fixed;
-            	bottom: 30px;
-            	right: 30px;
+            #dutchFab {
+                --paper-fab-background: #c7c7c7;
+                position: fixed;
+                bottom: 100px;
+                right: 38px;
+                visibility: hidden;
+            }
+
+            .mainFab {
+                --paper-fab-background: linear-gradient(to right, #ff5e62, #ff9966);
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+            }
+
+            .noCourses {
+                margin-top: 5%;
+                text-align: center;
+                font-size: 26px;
+                font-weight: 500;
+                opacity: 0.56;
+                color: black;
             }
         </style>
 
         <wisebird-profile-header></wisebird-profile-header>
 
         <div class="content">
-            <wisebird-course-card></wisebird-course-card>
+            <template is="dom-if" if="{{course}}">
+                <template is="dom-repeat" items="[[addedLanguages]]">
+                    <wisebird-course-card></wisebird-course-card>
+                </template>
+            </template>
+            <template is="dom-if" if="{{!course}}">
+                <div class="noCourses">
+                    Select with the bottom right button a language you're interested in.
+                    <p>
+                    <iron-image style="width:150px; height:200px;" sizing="contain"
+                                src="../images/add_image.svg"></iron-image>
+                    </p>
+                </div>
+            </template>
         </div>
 
-        <paper-fab src="../images/add_white.svg"></paper-fab>
+        <paper-fab noink mini id="dutchFab" value="[[language]]" src="../images/dutch-icon.svg" on-tap="_addCourse"></paper-fab>
+        <paper-fab noink class="mainFab" src="../images/add_white.svg" on-tap="_toggleFab"></paper-fab>
     </template>
 
     <script>
@@ -40,7 +71,65 @@
             }
 
             static get properties() {
-                return {};
+                return {
+                    languages: {
+                        type: Array,
+                        value: [],
+                    },
+                    addedLanguages: {
+                        type: Array,
+                        value: [],
+                    },
+                    toggleFab: {
+                        type: Boolean,
+                        value: false,
+                    },
+                    course: {
+                        type: Boolean,
+                        value: false,
+                    },
+                    language: {
+                        type: String,
+                        value: 'dutch',
+                    },
+                };
+            }
+
+            constructor() {
+                super();
+                this.languages = ['ukrainian', 'english', 'spanish', 'dutch'];
+            }
+
+            _addCourse(e) {
+                e = this.shadowRoot.getElementById('dutchFab').value;
+                let language;
+                console.log(this.languages);
+                switch (e) {
+                    case 'dutch':
+                        this.toggleFab = false;
+                        language = 'dutch';
+                        this.$.dutchFab.setAttribute('style', 'visibility: hidden');
+                        this.languages.pop(language);
+                        this.course = true;
+                        this.addedLanguages.push('dutch');
+                        break;
+                    default:
+                        this.dispatchEvent(new CustomEvent('requestChangePage', {
+                            bubbles: true,
+                            composed: true,
+                            detail: {route: '/view404'},
+                        }));
+                }
+            }
+
+            _toggleFab() {
+                if (this.toggleFab === false) {
+                    this.toggleFab = true;
+                    this.$.dutchFab.setAttribute('style', 'visibility: visible');
+                } else if (this.toggleFab === true) {
+                    this.toggleFab = false;
+                    this.$.dutchFab.setAttribute('style', 'visibility: hidden');
+                }
             }
         }
 

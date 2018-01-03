@@ -6,29 +6,27 @@
 	.st0{fill:#FFFFFF;}
 	.st1{fill:url(#SVGID_1_);}
 	.st2{fill:url(#SVGID_2_);}
-	.st3{fill:none;}
 </style>
 <title>Middel 2</title>
 <g id="Laag_2">
 	<g id="Taken_courses">
-		<rect class="st0" width="107.7" height="107.7"/>
+		<circle class="st0" cx="53.8" cy="53.8" r="53.9"/>
 		
-			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="21.83" y1="79.22" x2="85.78" y2="79.22" gradientTransform="matrix(1 0 0 -1 0 110)">
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="13.984" y1="84.8678" x2="93.579" y2="84.8678" gradientTransform="matrix(1 0 0 -1 0 110)">
 			<stop  offset="0" style="stop-color:#FF5E62"/>
 			<stop  offset="0.25" style="stop-color:#FF6763"/>
 			<stop  offset="0.64" style="stop-color:#FF7E64"/>
 			<stop  offset="1" style="stop-color:#FF9966"/>
 		</linearGradient>
-		<path class="st1" d="M53.8,19.7c-14.3,0-27,8.8-32,22.2h63.9C80.8,28.5,68.1,19.7,53.8,19.7z"/>
+		<path class="st1" d="M53.8,11.3c-17.7,0-33.6,11-39.8,27.6h79.6C87.4,22.3,71.5,11.3,53.8,11.3z"/>
 		
-			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="21.87" y1="33.117" x2="85.78" y2="33.117" gradientTransform="matrix(1 0 0 -1 0 110)">
+			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="14.0338" y1="27.4859" x2="93.579" y2="27.4859" gradientTransform="matrix(1 0 0 -1 0 110)">
 			<stop  offset="0" style="stop-color:#00B0FF"/>
 			<stop  offset="0.35" style="stop-color:#1A98EC"/>
 			<stop  offset="0.75" style="stop-color:#3183DB"/>
 			<stop  offset="1" style="stop-color:#3A7BD5"/>
 		</linearGradient>
-		<path class="st2" d="M85.8,65.8H21.9c6.6,17.6,26.2,26.6,43.9,20.1C75,82.4,82.3,75.1,85.8,65.8z"/>
-		<circle class="st3" cx="53.8" cy="53.8" r="35"/>
+		<path class="st2" d="M93.6,68.7H14c8.2,22,32.6,33.1,54.6,25C80.2,89.4,89.3,80.2,93.6,68.7z"/>
 	</g>
 </g>
 </svg>
