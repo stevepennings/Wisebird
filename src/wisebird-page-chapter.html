@@ -45,12 +45,23 @@
             }
 
             paper-fab {
+                z-index: 200;
+            }
+
+            .nextFab {
+                position: fixed;
                 --paper-fab-keyboard-focus-background: linear-gradient(to right, #ff5e62, #ff9966);
                 --paper-fab-background: linear-gradient(to right, #ff5e62, #ff9966);
-                position: fixed;
                 bottom: 30px;
                 right: 30px;
-                z-index: 200;
+            }
+
+            .finishFab {
+                --paper-fab-keyboard-focus-background: linear-gradient(to right, #00b0ff, #3a7bd5);
+                --paper-fab-background: linear-gradient(to right, #00b0ff, #3a7bd5);
+                position:relative;
+                margin: 0 auto;
+                margin-top: 20px;
             }
 
             paper-toast {
@@ -121,42 +132,91 @@
             paper-dialog {
                 border-radius: 5px;
             }
+
+            .endContent {
+                position: relative;
+                margin-top: 50px;
+                text-align: center;
+            }
+
+            .endText {
+                text-align: center;
+                font-size: 26px;
+                font-weight: 700;
+                opacity: 0.56;
+            }
+
+            .chapterNumber {
+                position: absolute;
+                color: #fafafa;
+                top: 20%;
+                right: 43%;
+                left: 43%;
+                font-size: 62px;
+                font-weight: 900;
+            }
         </style>
 
         <!--Question section-->
         <div class="content">
-            <iron-pages selected="0">
-                <template is="dom-repeat" items="[[questions]]">
-                    <div id="answer" value="{{item.answer}}" class="fade-in">
-                        <template is="dom-if" if="[[isOpenQuestion(item)]]">
-                            <div class="question">What is the correct translation for..</div>
-                            <div class="description">{{item.question}}</div>
-                            <wisebird-openquestion>
-                            </wisebird-openquestion>
-                        </template>
-                        <template is="dom-if" if="[[isMcQuestion(item)]]">
-                            <div style="text-align: center;">
+            <template is="dom-if" if="[[!chapterComplete]]">
+                <iron-pages selected="{{currentQuestion}}">
+                    <template is="dom-repeat" items="[[questions]]">
+                        <div id="answer" value="{{item.answer}}" class="fade-in"> {{item.answer}}
+                            <template is="dom-if" if="[[isOpenQuestion(item)]]">
+                                <div class="question">What is the correct translation for..</div>
+                                <div class="description">{{item.question}}</div>
+                                <wisebird-openquestion>
+                                </wisebird-openquestion>
+                            </template>
+                            <template is="dom-if" if="[[isMcQuestion(item)]]">
+                                <div style="text-align: center;">
+                                    <div class="question">{{item.question}}</div>
+                                    <wisebird-mcquestion></wisebird-mcquestion>
+                                </div>
+                            </template>
+                            <template is="dom-if" if="[[isSentenceQuestion(item)]]">
                                 <div class="question">{{item.question}}</div>
-                                <wisebird-mcquestion></wisebird-mcquestion>
-                            </div>
-                        </template>
-                        <template is="dom-if" if="[[isSentenceQuestion(item)]]">
-                            <div class="question">{{item.question}}</div>
-                            <wisebird-sentence></wisebird-sentence>
-                        </template>
-                    </div>
-                </template>
-            </iron-pages>
+                                <wisebird-sentence></wisebird-sentence>
+                            </template>
+                        </div>
+                    </template>
+                </iron-pages>
+            </template>
+            <template is="dom-if" if="[[chapterComplete]]">
+                <div class="endContent">
+                    <iron-image style="width:260px; height:260px;" sizing="contain"
+                                src="../images/chapter-complete.svg"></iron-image>
+                    <div class="chapterNumber">#1</div>
+                </div>
+                <div class="endText">Congratulations,</br>
+                    Wisebird!
+                </div>
+            </template>
         </div>
+
+        <!--<iron-pages selected="{{currentQuestion}}">-->
+        <!--<dom-repeat items="[[questions]]" as="question">-->
+        <!--<template>-->
+        <!--<span id$="question-[[index]]">[[question]]</span>-->
+        <!--<paper-input id$="answer-[[index]]"></paper-input>-->
+        <!--</template>-->
+        <!--</dom-repeat>-->
+        <!--</iron-pages>-->
 
         <!--Info in footer-->
         <div class="footer" style="text-align: center;">
-            <iron-icon id="info" class="info-logo" tabindex="0" src="../images/info.svg"></iron-icon>
-            <paper-tooltip for="info" position="top" offset="40">{{tooltip}}</paper-tooltip>
+            <template is="dom-if" if="[[!chapterComplete]]">
+                <iron-icon id="info" class="info-logo" tabindex="0" src="../images/info.svg"></iron-icon>
+                <paper-tooltip for="info" position="top" offset="40">{{tooltip}}</paper-tooltip>
+            </template>
+            <template is="dom-if" if="[[chapterComplete]]">
+                <paper-fab noink on-click="_courseOverview" class="finishFab" src="../images/check-chapter.svg"></paper-fab>
+            </template>
         </div>
 
         <!--Checks answer-->
-        <paper-fab on-click="_verifyInput" src="../images/check.svg"></paper-fab>
+        <paper-fab on-click="_verifyInput" class="nextFab" src="../images/check.svg" id="questionFab"></paper-fab>
 
         <!--Pop up for correct answer-->
         <paper-toast raised id="correct" class="fit-bottom">
@@ -205,6 +265,14 @@
                         type: Boolean,
                         value: false,
                     },
+                    currentQuestion: {
+                        type: Number,
+                        value: '0',
+                    },
+                    chapterComplete: {
+                        type: Boolean,
+                        value: false,
+                    },
                 };
             }
 
@@ -229,8 +297,15 @@
             }
 
             getInput() {
-                let i = this.shadowRoot.querySelector('wisebird-openquestion').input;
-                return i;
+                return this.shadowRoot.querySelector('wisebird-openquestion').input;
+            }
+
+            _courseOverview() {
+                this.dispatchEvent(new CustomEvent('requestChangePage', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {route: '/courseoverview'},
+                }));
             }
 
             getChapter() {
@@ -292,6 +367,9 @@
             }
 
             _verifyInput(input) {
+                let index = this.currentQuestion;
+                let totalQuestions = this.questions.length;
+                totalQuestions--;
                 if (this.allowNext === false) {
                     let input = this.getInput();
                     this._validate(input);
@@ -301,13 +379,21 @@
                     this.allowNext = true;
                 } else {
                     this._closeToast();
-                    this._nextQuestion();
-                    this.allowNext = false;
+                    console.log(index);
+                    console.log(totalQuestions);
+                    if (index < totalQuestions) {
+                        this._nextQuestion();
+                        this.allowNext = false;
+                    } else if (index == totalQuestions) {
+                        this.$.questionFab.setAttribute('style', 'visibility: hidden');
+                        this.chapterComplete = true;
+                    }
                 }
             }
 
             _validate(input) {
-                let answer = this.shadowRoot.getElementById('answer').value;
+                let answer = this.get(
+                    ['questions.' + this.currentQuestion + '.answer']);
                 answer = answer.toLowerCase();
                 input = input.toLowerCase();
                 if (input === answer) {
@@ -343,7 +429,6 @@
                 const checkIcon = '../images/check.svg';
                 let pages = this.shadowRoot.querySelector('iron-pages');
                 pages.selectNext();
-                console.log(pages.indexOf());
                 this.shadowRoot.querySelector('paper-fab').src = checkIcon;
             }
         }
