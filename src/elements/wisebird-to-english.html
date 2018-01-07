@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 
-<dom-module id="wisebird-openquestion">
+<dom-module id="wisebird-to-english">
     <template>
         <style>
             :host {
@@ -25,13 +25,13 @@
             }
         </style>
 
-        <iron-autogrow-textarea value="{{input}}" rows="8" placeholder="Type your answer here"></iron-autogrow-textarea>
+        <iron-autogrow-textarea value="{{input}}" rows="8" placeholder="Type your answer here">{{input}}</iron-autogrow-textarea>
     </template>
     <script>
         /** @polymerElement */
-        class openQuestion extends Polymer.Element {
+        class toEnglish extends Polymer.Element {
             static get is() {
-                return 'wisebird-openquestion';
+                return 'wisebird-to-english';
             }
 
             static get properties() {
@@ -44,6 +44,6 @@
                 };
             }
         }
-        window.customElements.define(openQuestion.is, openQuestion);
+        window.customElements.define(toEnglish.is, toEnglish);
     </script>
 </dom-module>

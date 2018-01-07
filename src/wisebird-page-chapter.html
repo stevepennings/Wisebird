@@ -9,7 +9,8 @@
 <link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 
 <link rel="import" href="elements/wisebird-mcquestion.html">
-<link rel="import" href="elements/wisebird-openquestion.html">
+<link rel="import" href="elements/wisebird-to-english.html">
+<link rel="import" href="elements/wisebird-to-dutch.html">
 <link rel="import" href="elements/wisebird-sentence.html">
 
 <dom-module id="wisebird-page-chapter">
@@ -59,7 +60,7 @@
             .finishFab {
                 --paper-fab-keyboard-focus-background: linear-gradient(to right, #00b0ff, #3a7bd5);
                 --paper-fab-background: linear-gradient(to right, #00b0ff, #3a7bd5);
-                position:relative;
+                position: relative;
                 margin: 0 auto;
                 margin-top: 20px;
             }
@@ -108,7 +109,7 @@
                 margin-right: 12px;
             }
 
-            wisebird-openquestion {
+            wisebird-to-english {
                 height: 100%;
             }
 
@@ -161,17 +162,25 @@
         <div class="content">
             <template is="dom-if" if="[[!chapterComplete]]">
                 <iron-pages selected="{{currentQuestion}}">
-                    <template is="dom-repeat" items="[[questions]]">
-                        <div id="answer" value="{{item.answer}}" class="fade-in"> {{item.answer}}
-                            <template is="dom-if" if="[[isOpenQuestion(item)]]">
+                    <template is="dom-repeat" items="{{questions}}">
+                        <div id="answer" value="{{item.answer}}" class="fade-in">
+                            <template is="dom-if" if="[[isToEnglish(item)]]">
                                 <div class="question">What is the correct translation for..</div>
                                 <div class="description">{{item.question}}</div>
-                                <wisebird-openquestion>
-                                </wisebird-openquestion>
+                                <wisebird-to-english
+                                        input="{{input}}">
+                                </wisebird-to-english>
+                            </template>
+                            <template is="dom-if" if="[[isToDutch(item)]]">
+                                <div class="question">What is the correct translation for..</div>
+                                <div class="description">{{item.question}}</div>
+                                <wisebird-to-dutch
+                                        input="{{input}}">
+                                </wisebird-to-dutch>
                             </template>
                             <template is="dom-if" if="[[isMcQuestion(item)]]">
                                 <div style="text-align: center;">
-                                    <div class="question">{{item.question}}</div>
+                                    <div class="question">Which one is the correct translation for {{item.question}}?</div>
                                     <wisebird-mcquestion></wisebird-mcquestion>
                                 </div>
                             </template>
@@ -202,7 +211,8 @@
                 <paper-tooltip for="info" position="top" offset="40">{{tooltip}}</paper-tooltip>
             </template>
             <template is="dom-if" if="[[chapterComplete]]">
-                <paper-fab noink on-click="_courseOverview" class="finishFab" src="../images/check-chapter.svg"></paper-fab>
+                <paper-fab noink on-click="_courseOverview" class="finishFab"
+                           src="../images/check-chapter.svg"></paper-fab>
             </template>
         </div>
 
@@ -264,6 +274,10 @@
                         type: Boolean,
                         value: false,
                     },
+                    input: {
+                        type: String,
+                        value: '',
+                    },
                 };
             }
 
@@ -272,8 +286,13 @@
                 this.getChapter();
             }
 
-            isOpenQuestion(question) {
-                if (question.type === 'openquestion') return true;
+            isToEnglish(question) {
+                if (question.type === 'to-english') return true;
+                return false;
+            }
+
+            isToDutch(question) {
+                if (question.type === 'to-dutch') return true;
                 return false;
             }
 
@@ -287,10 +306,6 @@
                 return false;
             }
 
-            getInput() {
-                return this.shadowRoot.querySelector('wisebird-openquestion').input;
-            }
-
             _courseOverview() {
                 this.dispatchEvent(new CustomEvent('requestChangePage', {
                     bubbles: true,
@@ -300,61 +315,17 @@
             }
 
             getChapter() {
-                this.questions = [
-                    {
-                        type: 'openquestion',
-                        question:
-                            'the girl',
-                        answer: 'het meisje',
-                    },
-                    {
-                        type: 'mcquestion',
-                        question:
-                        'Which one is the correct translation for ' +
-                        'the table?',
-                        answer: 'de tafel',
-                        choices: [
-                            {
-                                mc1: 'de klompen',
-                                mc2: 'de tafel',
-                                mc3: 'de papegaai',
-                                mc4: 'de windmolen',
-                            }],
-                    },
-                    {
-                        type: 'mcquestion',
-                        question:
-                        'Which one is the correct translation ' +
-                        'for the woman?',
-                        answer: 'de vrouw',
-                    },
-                    {
-                        type: 'mcquestion',
-                        question:
-                            'Which one is the correct translation for the boy?',
-                        answer: 'de jongen',
-                    },
-                    {
-                        type: 'openquestion',
-                        question:
-                            'I am a woman',
-                        answer: 'Ik ben een vrouw',
-                    },
-                    {
-                        type: 'sentence',
-                        question:
-                            'Ik ___ een glas water?',
-                        answer: 'drink',
-                    },
-                    {
-                        type: 'mcquestion',
-                        question:
-                        'Which one is the correct translation ' +
-                        'for the child?',
-                        answer: 'het kind',
-                    }];
-                let questions = this.questions;
-                return questions;
+                database.ref('languages/dutch/chapter1').on('value', (snapshot) => {
+                    if (snapshot.val() !== null) {
+                        this.questions = snapshot.val();
+                    } else {
+                        this.dispatchEvent(new CustomEvent('requestChangePage', {
+                            bubbles: true,
+                            composed: true,
+                            detail: {route: '/404', replace: true},
+                        }));
+                    }
+                });
             }
 
             _verifyInput(input) {
@@ -362,7 +333,7 @@
                 let totalQuestions = this.questions.length;
                 totalQuestions--;
                 if (this.allowNext === false) {
-                    let input = this.getInput();
+                    let input = this.input;
                     this._validate(input);
                     let check = this._validate(input);
                     this._openToast(check);

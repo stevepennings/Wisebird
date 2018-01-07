@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+
+<dom-module id="wisebird-to-dutch">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            iron-autogrow-textarea {
+                font-size: 16px;
+                font-weight: 500;
+                opacity: 0.56;
+                width: 80%;
+                max-width: 580px;
+                margin-top: 24px;
+                margin-left: 12px;
+                margin-right: 12px;
+                text-align: left;
+                border-radius: 10px;
+                border-style: solid;
+                border-width: 2px;
+                border-color: #e0e0e0;
+                background-color: #ffffff;
+            }
+        </style>
+
+        <iron-autogrow-textarea value="{{input}}" rows="8" placeholder="Type your answer here">{{input}}</iron-autogrow-textarea>
+    </template>
+    <script>
+        /** @polymerElement */
+        class toDutch extends Polymer.Element {
+            static get is() {
+                return 'wisebird-to-dutch';
+            }
+
+            static get properties() {
+                return {
+                    input: {
+                        type: String,
+                        notify: true,
+                        value: '',
+                    },
+                };
+            }
+        }
+        window.customElements.define(toDutch.is, toDutch);
+    </script>
+</dom-module>
