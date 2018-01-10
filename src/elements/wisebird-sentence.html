@@ -14,10 +14,6 @@
                 opacity: 0.87;
             }
 
-            iron-input {
-                width: 120px;
-            }
-
             input {
                 text-align: center;
                 width: 120px;
@@ -35,11 +31,9 @@
         </style>
 
         <div class="sentence">
-            Een
-            <iron-input bind-value="{{bindValue}}">
-                <input value="{{answer::input}}">
-            </iron-input>
-            drinkt cola op een bankje.
+            [[firstPart]]
+            <input type="text" value="{{input::change}}">
+            [[secondPart]]
         </div>
 
 
@@ -53,22 +47,43 @@
 
             static get properties() {
                 return {
-                    answer: {
+                    input: {
+                        type: String,
+                        notify: true,
+                        value: '',
+                    },
+                    question: {
                         type: String,
                         value: '',
-                        observer: 'answerFilled',
+                        observer: 'getSentence',
+                    },
+                    firstPart: {
+                        type: String,
+                        value: '',
+                    },
+                    secondPart: {
+                        type: String,
+                        value: '',
                     },
                 };
             }
 
             static get observers() {
                 return [
-                    'answerFilled(answer)',
+                    'getSentence(question)',
                 ];
             }
 
-            answerFilled(answer) {
-                //
+            getSentence(question) {
+                let sentence = question;
+                let firstPartIndex = sentence.indexOf('___');
+                this.firstPart = sentence.substring(0, firstPartIndex);
+                let secondPartIndex = firstPartIndex + 3;
+                this.secondPart = sentence.substring(secondPartIndex, sentence.length);
+            }
+
+            getInput() {
+                console.log(this.input);
             }
         }
 

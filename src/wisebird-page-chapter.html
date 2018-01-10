@@ -191,8 +191,11 @@
                                 </div>
                             </template>
                             <template is="dom-if" if="[[isSentenceQuestion(item)]]">
-                                <div class="question">{{item.question}}</div>
-                                <wisebird-sentence></wisebird-sentence>
+                                <div class="question">Complete the sentence.</div>
+                                <wisebird-sentence
+                                            question="{{item.question}}"
+                                            input="{{input}}">
+                                </wisebird-sentence>
                             </template>
                         </div>
                     </template>
@@ -397,6 +400,7 @@
                 let pages = this.shadowRoot.querySelector('iron-pages');
                 pages.selectNext();
                 this.shadowRoot.querySelector('paper-fab').src = checkIcon;
+                console.log(this.input);
                 this.input = '';
                 responsiveVoice.cancel();
             }
