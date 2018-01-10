@@ -181,7 +181,13 @@
                             <template is="dom-if" if="[[isMcQuestion(item)]]">
                                 <div style="text-align: center;">
                                     <div class="question">Which one is the correct translation for {{item.question}}?</div>
-                                    <wisebird-mcquestion></wisebird-mcquestion>
+                                    <wisebird-mcquestion
+                                            input="{{input}}"
+                                            mc1="{{item.choices.mc1}}"
+                                            mc2="{{item.choices.mc2}}"
+                                            mc3="{{item.choices.mc3}}"
+                                            mc4="{{item.choices.mc4}}"
+                                    ></wisebird-mcquestion>
                                 </div>
                             </template>
                             <template is="dom-if" if="[[isSentenceQuestion(item)]]">
@@ -269,6 +275,7 @@
                     currentQuestion: {
                         type: Number,
                         value: '0',
+                        notify: true,
                     },
                     chapterComplete: {
                         type: Boolean,
@@ -341,8 +348,6 @@
                     this.allowNext = true;
                 } else {
                     this._closeToast();
-                    console.log(index);
-                    console.log(totalQuestions);
                     if (index < totalQuestions) {
                         this._nextQuestion();
                         this.allowNext = false;
@@ -392,6 +397,8 @@
                 let pages = this.shadowRoot.querySelector('iron-pages');
                 pages.selectNext();
                 this.shadowRoot.querySelector('paper-fab').src = checkIcon;
+                this.input = '';
+                responsiveVoice.cancel();
             }
         }
 

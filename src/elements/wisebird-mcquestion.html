@@ -1,73 +1,72 @@
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
 
 <dom-module id="wisebird-mcquestion">
     <template>
         <style>
             :host {
                 display: block;
-                --paper-checkbox-unchecked-background-color: #e0e0e0;
-                --paper-checkbox-unchecked-color: #e0e0e0;
-                --paper-checkbox-ink-size: 0px;
-                --paper-checkbox-checked-color: var(--paper-blue-500);
-                --paper-checkbox-checked-ink-color: var(--paper-blue-500);
-                --paper-checkbox-size: 16px;
             }
 
-            paper-card {
-                width: 150px;
+            .choice {
+                text-align: center;
+                font-size: 16px;
+                font-style: italic;
+                font-weight: 500;
+                opacity: 0.56;
+            }
+
+            .choice-contour {
+                float: left;
+                background-color: #efefef;
+                border-color: #eeeeee;
+                border-style: solid;
+                border-width: 2px;
+                border-radius: 10px;
+                width: 130px;
                 margin-right: 4px;
                 margin-left: 4px;
-                margin-bottom: 16px;
+                margin-bottom: 8px;
             }
 
-            .text-align {
-                text-align: left;
-                vertical-align: middle;
+            .choice-contour:hover {
+                cursor: pointer;
+                border-color: #00c6ff;
             }
 
-            paper-radio-button {
-                --paper-radio-button-unchecked-color: #e0e0e0;
-                --paper-radio-button-checked-color: #1a98ec;
-                font-size: 14px;
-                font-weight: 400;
-                opacity: 0.87;
+            #mc1:focus {
+                background-color: #00c6ff;
             }
         </style>
 
-        <div class="horizontal">
-            <paper-card
-                    image="https://www.ouderwetsewinkel.nl/pub/media/catalog/product/cache/75eed2686e01eb22cb4050b2f40ddf97/g/e/gele-klompen_22.jpg"
-                    alt="Trip" class="white">
-                <div class="card-actions horizontal justified text-align">
-                    <paper-radio-button noink>[[mc1]]</paper-radio-button>
-                </div>
-            </paper-card>
-            <paper-card
-                    image="http://foundus.si/wp-content/uploads/2017/06/vintage-tulip-white-marble-table-1-550x550.jpg"
-                    alt="Travel" class="white">
-                <div class="card-actions horizontal justified text-align">
-                    <paper-radio-button noink>[[mc2]]</paper-radio-button>
-                </div>
-            </paper-card>
-        </div>
-        <div class="horizontal">
-            <paper-card
-                    image="https://02f0a56ef46d93f03c90-22ac5f107621879d5667e0d7ed595bdb.ssl.cf2.rackcdn.com/sites/114/photos/31219/amazon-parrot-sm20130828-28278-e2pcik-0_960x.jpg"
-                    alt="Trip" class="white">
-                <div class="card-actions horizontal justified text-align">
-                    <paper-radio-button noink>[[mc3]]</paper-radio-button>
-                </div>
-            </paper-card>
-            <paper-card
-                    image="http://jamestownhistoricalsociety.org/wp-content/uploads/2015/04/windmill-full-sail.jpg"
-                    alt="Travel" class="white">
-                <div class="card-actions horizontal justified text-align">
-                    <paper-radio-button noink>[[mc4]]</paper-radio-button>
-                </div>
-            </paper-card>
-        </div>
+
+        <form action="vraag1">
+            <div class="choice-contour" on-tap="getOption1">
+                <iron-image style="width:118px; height:118px; margin-top:6px; border-radius: 7px;"
+                            sizing="cover"
+                            src="https://cdn.pixabay.com/photo/2016/06/18/17/42/image-1465348_960_720.jpg"></iron-image>
+                <span class="choice" id="mc1" value="[[mc1]]">"{{mc1}}"</span>
+            </div>
+            <div class="choice-contour" on-tap="getOption2">
+                <iron-image style="width:118px; height:118px; margin-top: 6px; border-radius: 7px;"
+                            sizing="cover"
+                            src="http://foundus.si/wp-content/uploads/2017/06/vintage-tulip-white-marble-table-1-550x550.jpg"></iron-image>
+                <div class="choice" id="mc2" value="[[mc2]]">"[[mc2]]"</div>
+            </div>
+            <div class="choice-contour" on-tap="getOption3">
+                <iron-image style="width:118px; height:118px; margin-top: 6px; border-radius: 7px;"
+                            sizing="cover"
+                            src="https://02f0a56ef46d93f03c90-22ac5f107621879d5667e0d7ed595bdb.ssl.cf2.rackcdn.com/sites/114/photos/31219/amazon-parrot-sm20130828-28278-e2pcik-0_960x.jpg"></iron-image>
+                <div class="choice" id="mc3" value="[[mc3]]">"[[mc3]]"</div>
+            </div>
+            <div class="choice-contour" on-tap="getOption4">
+                <iron-image style="width:118px; height:118px; margin-top: 6px; border-radius: 7px;"
+                            sizing="cover"
+                            src="http://jamestownhistoricalsociety.org/wp-content/uploads/2015/04/windmill-full-sail.jpg"></iron-image>
+                <div class="choice" id="mc4" value="[[mc4]]">"[[mc4]]"{{currentQuestion}}</div>
+            </div>
+        </form>
     </template>
     <script>
         /** @polymerElement */
@@ -80,21 +79,47 @@
                 return {
                     mc1: {
                         type: String,
-                        value: 'Klompen',
+                        value: '',
+                        image: '',
                     },
                     mc2: {
                         type: String,
-                        value: 'Tafel',
+                        value: '',
                     },
                     mc3: {
                         type: String,
-                        value: 'Papegaai',
+                        value: '',
                     },
                     mc4: {
                         type: String,
-                        value: 'Windmolen',
+                        value: '',
+                    },
+                    input: {
+                        type: String,
+                        notify: true,
+                        value: '',
                     },
                 };
+            }
+
+            getOption1() {
+                this.input = this.shadowRoot.getElementById('mc1').value;
+                responsiveVoice.speak(this.input, 'Dutch Female');
+            }
+
+            getOption2() {
+                this.input = this.shadowRoot.getElementById('mc2').value;
+                responsiveVoice.speak(this.input, 'Dutch Female');
+            }
+
+            getOption3() {
+                this.input = this.shadowRoot.getElementById('mc3').value;
+                responsiveVoice.speak(this.input, 'Dutch Female');
+            }
+
+            getOption4() {
+                this.input = this.shadowRoot.getElementById('mc4').value;
+                responsiveVoice.speak(this.input, 'Dutch Female');
             }
         }
 
