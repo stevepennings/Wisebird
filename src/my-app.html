@@ -167,7 +167,7 @@
                             </div>
                         </template>
                         <template is="dom-if" if="[[chapter]]">
-                            <div style="margin-right: 12px; font-size: 18px; font-weight: 600;">2 / 12</div>
+                            <div style="margin-right: 12px; font-size: 18px; font-weight: 600;">[[currentQuestion]] / [[chapterLength]]</div>
                         </template>
                     </app-toolbar>
                 </app-header>
@@ -215,6 +215,14 @@
                     questionScore: {
                         type: Number,
                         value: 0,
+                    },
+                    currentQuestion: {
+                        type: Number,
+                        value: null,
+                    },
+                    chapterLength: {
+                        type: Number,
+                        value: null,
                     },
                     chapter: Boolean,
                     courseoverview: Boolean,

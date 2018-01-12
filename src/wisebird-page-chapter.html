@@ -157,7 +157,7 @@
                 font-weight: 900;
             }
         </style>
-
+{{currentQuestionShow}} / {{chapterLength}}
         <!--Question section-->
         <div class="content">
             <template is="dom-if" if="[[!chapterComplete]]">
@@ -180,7 +180,8 @@
                             </template>
                             <template is="dom-if" if="[[isMcQuestion(item)]]">
                                 <div style="text-align: center;">
-                                    <div class="question">Which one is the correct translation for {{item.question}}?</div>
+                                    <div class="question">Which one is the correct translation for {{item.question}}?
+                                    </div>
                                     <wisebird-mcquestion
                                             input="{{input}}"
                                             mc1="{{item.choices.mc1}}"
@@ -193,8 +194,8 @@
                             <template is="dom-if" if="[[isSentenceQuestion(item)]]">
                                 <div class="question">Complete the sentence.</div>
                                 <wisebird-sentence
-                                            question="{{item.question}}"
-                                            input="{{input}}">
+                                        question="{{item.question}}"
+                                        input="{{input}}">
                                 </wisebird-sentence>
                             </template>
                         </div>
@@ -267,6 +268,10 @@
                         type: Array,
                         value: [],
                     },
+                    questionsReset: {
+                        type: Array,
+                        value: [],
+                    },
                     tooltip: {
                         type: String,
                         value: 'tooltip',
@@ -277,7 +282,17 @@
                     },
                     currentQuestion: {
                         type: Number,
-                        value: '0',
+                        value: 0,
+                        notify: true,
+                    },
+                    currentQuestionShow: {
+                        type: Number,
+                        value: 1,
+                        notify: true,
+                    },
+                    chapterLength: {
+                        type: Number,
+                        value: null,
                         notify: true,
                     },
                     chapterComplete: {
@@ -328,6 +343,7 @@
                 database.ref('languages/dutch/chapter1').on('value', (snapshot) => {
                     if (snapshot.val() !== null) {
                         this.questions = snapshot.val();
+                        this.chapterLength = this.questions.length;
                     } else {
                         this.dispatchEvent(new CustomEvent('requestChangePage', {
                             bubbles: true,
@@ -339,22 +355,25 @@
             }
 
             _verifyInput(input) {
-                let index = this.currentQuestion;
-                let totalQuestions = this.questions.length;
-                totalQuestions--;
+                let chapterLength = this.questions.length;
+                let currentQuestion = (this.currentQuestion + 1);
                 if (this.allowNext === false) {
                     let input = this.input;
                     this._validate(input);
                     let check = this._validate(input);
+                    if (check === false) {
+                        this._addQuestion();
+                    }
                     this._openToast(check);
                     this._changeFab(check);
                     this.allowNext = true;
                 } else {
                     this._closeToast();
-                    if (index < totalQuestions) {
+                    if (currentQuestion < chapterLength) {
                         this._nextQuestion();
                         this.allowNext = false;
-                    } else if (index == totalQuestions) {
+                        console.log(currentQuestion + ' + ' + chapterLength);
+                    } else if (currentQuestion === chapterLength) {
                         this.$.questionFab.setAttribute('style', 'visibility: hidden');
                         this.chapterComplete = true;
                     }
@@ -373,6 +392,23 @@
                     input = false;
                     return input;
                 }
+            }
+
+            _addQuestion() {
+                let question = this.get([
+                    'questions.' + this.currentQuestion + '.question']);
+                let answer = this.get([
+                    'questions.' + this.currentQuestion + '.answer']);
+                let type = this.get([
+                    'questions.' + this.currentQuestion + '.type']);
+                if (type === 'mcquestion') {
+                    let choices = this.get([
+                        'questions.' + this.currentQuestion + '.choices']);
+                    this.push('questions', {answer, question, type, choices});
+                } else {
+                    this.push('questions', {answer, question, type});
+                }
+                this.chapterLength = this.questions.length;
             }
 
             _changeFab() {
@@ -400,8 +436,8 @@
                 let pages = this.shadowRoot.querySelector('iron-pages');
                 pages.selectNext();
                 this.shadowRoot.querySelector('paper-fab').src = checkIcon;
-                console.log(this.input);
                 this.input = '';
+                this.currentQuestionShow++;
                 responsiveVoice.cancel();
             }
         }
