@@ -366,6 +366,7 @@
                     }
                     this._openToast(check);
                     this._changeFab(check);
+                    this._soundAnswer(input);
                     this.allowNext = true;
                 } else {
                     this._closeToast();
@@ -377,6 +378,31 @@
                         this.$.questionFab.setAttribute('style', 'visibility: hidden');
                         this.chapterComplete = true;
                     }
+                }
+            }
+
+            _soundAnswer(input) {
+                let type = this.get([
+                    'questions.' + this.currentQuestion + '.type']);
+                switch (type) {
+                    case 'mcquestion':
+                        console.log('This answered has been spoken already.');
+                        break;
+                    case 'to-dutch':
+                        responsiveVoice.speak(input, 'Dutch Female');
+                        break;
+                    case 'sentence':
+                        responsiveVoice.speak(input, 'Dutch Female');
+                        break;
+                    // eslint-disable-next-line
+                    case 'to-english':
+                        let question = this.get([
+                            'questions.' + this.currentQuestion + '.question']);
+                        responsiveVoice.speak(question, 'Dutch Female');
+                        break;
+                    default:
+                        responsiveVoice.speak('Not recognized', 'Dutch Female');
+                        break;
                 }
             }
 
