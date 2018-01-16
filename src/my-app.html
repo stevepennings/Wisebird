@@ -125,10 +125,6 @@
                             <iron-icon class="unselected" src="../images/menu/leaderboard-white.svg"></iron-icon>
                             <!--<iron-icon class="selected" src="../images/menu/leaderboard-color.svg"></iron-icon>-->
                         </a>
-                        <a name="button" on-tap="_consoleLog">
-                            <iron-icon class="unselected" src="../images/close.svg"></iron-icon>
-                            <!--<iron-icon class="selected" src="../images/menu/leaderboard-color.svg"></iron-icon>-->
-                        </a>
                         <div class="actions">
                             <a name="settings" href="[[rootPath]]settings">
                                 <iron-icon class="unselected" src="../images/menu/settings-white.svg"></iron-icon>
@@ -265,10 +261,6 @@
                 this.addEventListener('login', this.login);
                 this.addEventListener('requestChangePage', this._changePage);
                 this.addEventListener('requestLogout', this._logout);
-            }
-
-            _consoleLog() {
-                console.log(this.user.uid);
             }
 
             _handleDialog() {

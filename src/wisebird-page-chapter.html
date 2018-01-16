@@ -311,6 +311,7 @@
             constructor() {
                 super();
                 this.getChapter();
+                this.getTooltip();
             }
 
             isToEnglish(question) {
@@ -346,6 +347,21 @@
                     if (snapshot.val() !== null) {
                         this.questions = snapshot.val();
                         this.chapterLength = this.questions.length;
+                    } else {
+                        this.dispatchEvent(new CustomEvent('requestChangePage', {
+                            bubbles: true,
+                            composed: true,
+                            detail: {route: '/404', replace: true},
+                        }));
+                    }
+                });
+            }
+
+            getTooltip() {
+                database.ref('chapter_tooltips/dutch/chapter1').on(
+                    'value', (snapshot) => {
+                    if (snapshot.val() !== null) {
+                        this.tooltip = snapshot.val();
                     } else {
                         this.dispatchEvent(new CustomEvent('requestChangePage', {
                             bubbles: true,
