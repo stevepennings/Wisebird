@@ -254,6 +254,8 @@
                 <paper-button dialog-confirm autofocus>Quit</paper-button>
             </div>
         </paper-dialog>
+        <audio id="audio-correct" src="assets/correct_answer.mp3" autostart="false" ></audio>
+        <audio id="audio-wrong" src="assets/wrong_answer.mp3" autostart="false" ></audio>
     </template>
 
     <script>
@@ -364,6 +366,7 @@
                     if (check === false) {
                         this._addQuestion();
                     }
+                    this._playSound(check);
                     this._openToast(check);
                     this._changeFab(check);
                     this._soundAnswer(input);
@@ -381,12 +384,20 @@
                 }
             }
 
+            _playSound(check) {
+                if(check === true) {
+                    this.shadowRoot.getElementById('audio-correct').play();
+                } else if (check === false) {
+                    this.shadowRoot.getElementById('audio-wrong').play();
+                }
+            }
+
             _soundAnswer(input) {
                 let type = this.get([
                     'questions.' + this.currentQuestion + '.type']);
                 switch (type) {
                     case 'mcquestion':
-                        console.log('This answered has been spoken already.');
+                        // Already mentioned
                         break;
                     case 'to-dutch':
                         responsiveVoice.speak(input, 'Dutch Female');
