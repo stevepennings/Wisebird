@@ -158,7 +158,7 @@
                 font-weight: 900;
             }
         </style>
-{{currentQuestionShow}} / {{chapterLength}}
+
         <!--Question section-->
         <div class="content">
             <template is="dom-if" if="[[!chapterComplete]]">
@@ -328,6 +328,8 @@
                 this.chapterSelect = app.chapterSelect;
                 this.getChapter();
                 this.getTooltip();
+                app.currentQuestion = this.currentQuestionShow;
+                app.chapterLength = this.chapterLength;
             }
 
             isToEnglish(question) {
@@ -409,7 +411,6 @@
                     if (currentQuestion < chapterLength) {
                         this._nextQuestion();
                         this.allowNext = false;
-                        console.log(currentQuestion + ' + ' + chapterLength);
                     } else if (currentQuestion === chapterLength) {
                         this.$.questionFab.setAttribute('style', 'visibility: hidden');
                         this.chapterComplete = true;
@@ -508,6 +509,9 @@
                 this.shadowRoot.querySelector('paper-fab').src = checkIcon;
                 this.input = '';
                 this.currentQuestionShow++;
+                const app = document.querySelector('my-app');
+                app.currentQuestion++;
+                app.chapterLength = this.chapterLength;
                 responsiveVoice.cancel();
             }
         }
