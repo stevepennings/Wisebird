@@ -8,6 +8,7 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 
+<link rel="import" href="wisebird-page-courseoverview.html">
 <link rel="import" href="elements/wisebird-mcquestion.html">
 <link rel="import" href="elements/wisebird-to-english.html">
 <link rel="import" href="elements/wisebird-to-dutch.html">
@@ -301,6 +302,10 @@
                         type: Boolean,
                         value: false,
                     },
+                    chapterSelect: {
+                        type: String,
+                        value: null,
+                    },
                     input: {
                         type: String,
                         value: '',
@@ -310,6 +315,17 @@
 
             constructor() {
                 super();
+                this._boundListener = this.selectedChapter.bind(this);
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                window.addEventListener('chapterSelected', this._boundListener);
+            }
+
+            selectedChapter() {
+                const app = document.querySelector('my-app');
+                this.chapterSelect = app.chapterSelect;
                 this.getChapter();
                 this.getTooltip();
             }
@@ -343,7 +359,8 @@
             }
 
             getChapter() {
-                database.ref('languages/dutch/chapter1').on('value', (snapshot) => {
+                database.ref('languages/dutch/' + this.chapterSelect).
+                on('value', (snapshot) => {
                     if (snapshot.val() !== null) {
                         this.questions = snapshot.val();
                         this.chapterLength = this.questions.length;

@@ -40,62 +40,44 @@
         </style>
 
         <div class="content" style="text-align: center;">
-            <div class="row">
-                <iron-image class="egg" sizing="contain" on-tap="_selectChapter"
-                            src="../images/course-egg-fill.svg"></iron-image>
-                <br>
-                <paper-button on-tap="_selectChapter">Chapter 1</paper-button>
-            </div>
-            <div class="row">
-                <div class="half-row">
-                    <iron-image class="egg unavailable" sizing="contain"
-                                src="../images/course-egg-fill.svg"></iron-image>
-                    <div class="unavailable"><br>Chapter 2</div>
+            <template is="dom-repeat" items="{{chapters}}">
+                <div class="row">
+                    <div class="half-row">
+                        <iron-image class="egg" sizing="contain" on-tap="_selectChapter"
+                                    src="../images/course-egg-fill.svg"></iron-image>
+                        <br>
+                        <paper-button on-tap="_selectChapter" id="[[item]]">[[item]]</paper-button>
+                    </div>
                 </div>
-                <div class="half-row">
-                    <iron-image class="egg unavailable" sizing="contain"
-                                src="../images/course-egg-fill.svg"></iron-image>
-                    <div class="unavailable"><br>Chapter 3</div>
-                </div>
-            </div>
-            <div class="row unavailable">
-            <iron-image class="egg" sizing="contain"
-                        src="../images/course-egg-fill.svg"></iron-image>
-            <br>
-            Chapter 4
-        </div>
-            <div class="row unavailable">
-                <div class="half-row">
-                    <iron-image class="egg" sizing="contain"
-                                src="../images/course-egg-fill.svg"></iron-image>
-                    <br>Chapter 5
-                </div>
-                <div class="half-row">
-                    <iron-image class="egg" sizing="contain"
-                                src="../images/course-egg-fill.svg"></iron-image>
-                    <br>Chapter 6
-                </div>
-            </div>
-            <div class="row unavailable">
-                <iron-image class="egg" sizing="contain"
-                            src="../images/course-egg-fill.svg"></iron-image>
-                <br>
-                Chapter 7
-            </div>
-            <div class="row unavailable">
-                <div class="half-row">
-                    <iron-image class="egg" sizing="contain"
-                                src="../images/course-egg-fill.svg"></iron-image>
-                    <br>Chapter 8
-                </div>
-                <div class="half-row">
-                    <iron-image class="egg" sizing="contain"
-                                src="../images/course-egg-fill.svg"></iron-image>
-                    <br>Chapter 9
-                </div>
-            </div>
+            </template>
         </div>
 
+        <!--<div class="content" style="text-align: center;">-->
+        <!--<div class="row">-->
+        <!--<iron-image class="egg" sizing="contain" on-tap="_selectChapter"-->
+        <!--src="../images/course-egg-fill.svg"></iron-image>-->
+        <!--<br>-->
+        <!--<paper-button on-tap="_selectChapter">Chapter 1</paper-button>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+        <!--<div class="half-row">-->
+        <!--<iron-image class="egg unavailable" sizing="contain"-->
+        <!--src="../images/course-egg-fill.svg"></iron-image>-->
+        <!--<div class="unavailable"><br>Chapter 2</div>-->
+        <!--</div>-->
+        <!--<div class="half-row">-->
+        <!--<iron-image class="egg unavailable" sizing="contain"-->
+        <!--src="../images/course-egg-fill.svg"></iron-image>-->
+        <!--<div class="unavailable"><br>Chapter 3</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row unavailable">-->
+        <!--<iron-image class="egg" sizing="contain"-->
+        <!--src="../images/course-egg-fill.svg"></iron-image>-->
+        <!--<br>-->
+        <!--Chapter 4-->
+        <!--</div>-->
+        <!--</div>-->
     </template>
 
     <script>
@@ -105,10 +87,51 @@
             }
 
             static get properties() {
-                return {};
+                return {
+                    chapters: {
+                        type: Array,
+                        value: [],
+                    },
+                    chapterCount: {
+                        type: Number,
+                        value: 0,
+                    },
+                    chapterSelect: {
+                        type: String,
+                        value: null,
+                        notify: true,
+                    },
+                };
             }
 
-            _selectChapter() {
+            constructor() {
+                super();
+                this._getChapters();
+            }
+
+            _getChapters() {
+                database.ref('languages/dutch').on('value', (snapshot) => {
+                    if (snapshot.val() !== null) {
+                        this.chapters = Object.keys(snapshot.val());
+                        this.chapterCount = this.chapters.length;
+                    } else {
+                        this.dispatchEvent(new CustomEvent('requestChangePage', {
+                            bubbles: true,
+                            composed: true,
+                            detail: {route: '/404', replace: true},
+                        }));
+                    }
+                });
+            }
+
+            _selectChapter(e) {
+                const app = document.querySelector('my-app');
+                this.chapterSelect = e.target.id;
+                app.chapterSelect = this.chapterSelect;
+                this.dispatchEvent(new CustomEvent('chapterSelected', {
+                    bubbles: true,
+                    composed: true,
+                }));
                 this.dispatchEvent(new CustomEvent('requestChangePage', {
                     bubbles: true,
                     composed: true,

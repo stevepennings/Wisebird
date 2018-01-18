@@ -204,6 +204,10 @@
                         notify: true,
                         observer: '_userSignedin',
                     },
+                    chapterSelect: {
+                        type: String,
+                        notify: true,
+                    },
                     chapterScore: {
                         type: Number,
                         value: 0,
@@ -314,7 +318,6 @@
                         this.shadowRoot.querySelector('app-drawer').resetLayout();
                         this.chapter = true;
                         this.courseoverview = false;
-                        console.log(this.chapter);
                         break;
                     case 'login':
                         this.$.drawer.setAttribute(
@@ -344,7 +347,6 @@
                         this.updateStyles({'--app-drawer-width': '64px'});
                         this.$.menu.setAttribute('style', 'display: block');
                         this.shadowRoot.querySelector('app-drawer').resetLayout();
-                        console.log(this.chapter);
                         this.courseoverview = false;
                         this.chapter = false;
                 }
