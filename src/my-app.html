@@ -354,7 +354,10 @@
 
             _userSignedin(user) {
                 if (user !== null) {
-                    console.log(user.uid);
+                    this.dispatchEvent(new CustomEvent('bindUser', {
+                        bubbles: true,
+                        composed: true,
+                    }));
                 } else {
                     console.log('Cannot track progress');
                 }

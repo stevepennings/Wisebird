@@ -40,13 +40,23 @@
         </style>
 
         <div class="content" style="text-align: center;">
-            <template is="dom-repeat" items="{{chapters}}">
+            <template is="dom-repeat" items="{{chaptersComplete}}">
+                    <div class="row">
+                        <div class="half-row">
+                            <iron-image class="egg" sizing="contain" on-tap="_selectChapter"
+                                        src="../images/course-egg-fill.svg"></iron-image>
+                            <br>
+                            <paper-button on-tap="_selectChapter" id="[[item]]">[[item]]</paper-button>
+                        </div>
+                    </div>
+            </template>
+            <template is="dom-repeat" items="{{chaptersIncomplete}}">
                 <div class="row">
                     <div class="half-row">
-                        <iron-image class="egg" sizing="contain" on-tap="_selectChapter"
+                        <iron-image class="egg" sizing="contain" style="opacity: 0.13;"
                                     src="../images/course-egg-fill.svg"></iron-image>
                         <br>
-                        <paper-button on-tap="_selectChapter" id="[[item]]">[[item]]</paper-button>
+                        <paper-button id="[[item]]" style="opacity: 0.56;">[[item]]</paper-button>
                     </div>
                 </div>
             </template>
@@ -88,9 +98,22 @@
 
             static get properties() {
                 return {
-                    chapters: {
-                        type: Array,
-                        value: [],
+                    user: {
+                        type: Object,
+                        value: null,
+                        notify: true,
+                    },
+                    chaptersComplete: {
+                        type: Object,
+                        value: null,
+                    },
+                    chaptersIncomplete: {
+                        type: Object,
+                        value: null,
+                    },
+                    progress: {
+                        type: Object,
+                        value: null,
                     },
                     chapterCount: {
                         type: Number,
@@ -106,14 +129,46 @@
 
             constructor() {
                 super();
-                this._getChapters();
+                this._boundListener = this.getUser.bind(this);
             }
 
-            _getChapters() {
-                database.ref('languages/dutch').on('value', (snapshot) => {
+            connectedCallback() {
+                super.connectedCallback();
+                window.addEventListener('bindUser', this._boundListener);
+            }
+
+            getUser() {
+                const app = document.querySelector('my-app');
+                console.log('hey');
+                if (app.user) {
+                    this.user = app.user;
+                    this._getProgress();
+                } else {
+                    this.dispatchEvent(new CustomEvent('requestChangePage', {
+                        bubbles: true,
+                        composed: true,
+                        detail: {route: '/login'},
+                    }));
+                }
+            }
+
+            _getProgress() {
+                let user = this.user;
+                database.ref('user_chapters/' + user.uid).on('value', (snapshot) => {
                     if (snapshot.val() !== null) {
-                        this.chapters = Object.keys(snapshot.val());
-                        this.chapterCount = this.chapters.length;
+                        this.progress = (snapshot.val());
+//                        this.chapters = Object.keys(snapshot.val());
+                        let progress = this.progress;
+                        let keys = Object.keys(progress);
+                        this.chaptersComplete = keys.filter(function(key) {
+                            return progress[key];
+                        });
+                        this.chaptersIncomplete = keys.filter(function(key) {
+                            return !progress[key];
+                        });
+//                        this.chaptersComplete = keys.filter(function(key) {
+//                            return progress[key];
+//                        });
                     } else {
                         this.dispatchEvent(new CustomEvent('requestChangePage', {
                             bubbles: true,
@@ -122,6 +177,21 @@
                         }));
                     }
                 });
+            }
+
+            completedChapter(key) {
+                if (key === true) return true;
+                return false;
+            }
+
+            uncompletedChapter(key) {
+                if (key === false) return true;
+                return false;
+            }
+
+            _getChapters() {
+                this.chapters = Object.keys(snapshot.val());
+                this.chapterCount = this.chapters.length;
             }
 
             _selectChapter(e) {

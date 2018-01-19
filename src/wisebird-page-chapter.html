@@ -267,6 +267,11 @@
 
             static get properties() {
                 return {
+                    user: {
+                        type: Object,
+                        value: null,
+                        notify: true,
+                    },
                     questions: {
                         type: Array,
                         value: [],
@@ -315,6 +320,16 @@
 
             constructor() {
                 super();
+                const app = document.querySelector('my-app');
+                if(app.user) {
+                    this.user = app.user;
+                } else {
+                    this.dispatchEvent(new CustomEvent('requestChangePage', {
+                        bubbles: true,
+                        composed: true,
+                        detail: {route: '/login'},
+                    }));
+                }
                 this._boundListener = this.selectedChapter.bind(this);
             }
 
@@ -323,11 +338,33 @@
                 window.addEventListener('chapterSelected', this._boundListener);
             }
 
+            ready() {
+                super.ready();
+                const app = document.querySelector('my-app');
+                database.ref('languages/dutch/' + app.chapterSelect).
+                on('value', (snapshot) => {
+                    if (snapshot.val() !== null) {
+                        this.questions = snapshot.val();
+                        this.chapterLength = this.questions.length;
+                        app.currentQuestion = this.currentQuestionShow;
+                        app.chapterLength = this.chapterLength;
+                    } else {
+                        this.dispatchEvent(new CustomEvent('requestChangePage', {
+                            bubbles: true,
+                            composed: true,
+                            detail: {route: '/404', replace: true},
+                        }));
+                    }
+                });
+            }
+
             selectedChapter() {
                 const app = document.querySelector('my-app');
                 this.chapterSelect = app.chapterSelect;
-                this.getChapter();
-                this.getTooltip();
+                if(this.chapterSelect) {
+                    this.getChapter();
+                    this.getTooltip();
+                }
                 app.currentQuestion = this.currentQuestionShow;
                 app.chapterLength = this.chapterLength;
             }
