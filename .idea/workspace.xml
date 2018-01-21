@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6dc8af37-806f-46be-9f1e-98f42e5286cc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/my-app.html" afterPath="$PROJECT_DIR$/src/my-app.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-chapter.html" afterPath="$PROJECT_DIR$/src/wisebird-page-chapter.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/elements/wisebird-mcquestion.html" afterPath="$PROJECT_DIR$/src/elements/wisebird-mcquestion.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-courseoverview.html" afterPath="$PROJECT_DIR$/src/wisebird-page-courseoverview.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="wisebird-page-chapter.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wisebird-page-chapter.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wisebird-page-chapter.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="167" column="75" lean-forward="false" selection-start-line="167" selection-start-column="54" selection-end-line="167" selection-end-column="75" />
+            <state relative-caret-position="-546">
+              <caret line="174" column="75" lean-forward="true" selection-start-line="174" selection-start-column="75" selection-end-line="174" selection-end-column="75" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#2;n#div#0;n#template#0;n#iron-pages#0;n#template#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#iron-image#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
@@ -37,8 +36,8 @@
       <file leaf-file-name="my-app.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/my-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5010">
-              <caret line="362" column="17" lean-forward="true" selection-start-line="362" selection-start-column="17" selection-end-line="362" selection-end-column="17" />
+            <state relative-caret-position="483">
+              <caret line="351" column="17" lean-forward="true" selection-start-line="311" selection-start-column="16" selection-end-line="351" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -47,13 +46,21 @@
       <file leaf-file-name="wisebird-page-courseoverview.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/wisebird-page-courseoverview.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state relative-caret-position="880">
+              <caret line="45" column="77" lean-forward="false" selection-start-line="45" selection-start-column="77" selection-end-line="45" selection-end-column="77" />
               <folding>
-                <element signature="n#style#0;n#iron-image#0;n#div#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#paper-button#0;n#div#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
-                <marker date="1516383945171" expanded="false" signature="2128:2147" ph="..." />
+                <marker date="1516540088646" expanded="false" signature="2144:2163" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wisebird-mcquestion.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/elements/wisebird-mcquestion.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="432">
+              <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,13 +135,13 @@
         <option value="$PROJECT_DIR$/src/elements/wisebird-to-english.html" />
         <option value="$PROJECT_DIR$/src/elements/wisebird-sentence.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/elements/wisebird-mcquestion.html" />
         <option value="$PROJECT_DIR$/src/elements/wisebird-course-card.html" />
         <option value="$PROJECT_DIR$/src/wisebird-page-homescreen.html" />
         <option value="$PROJECT_DIR$/src/elements/wisebird-profile-header.html" />
         <option value="$PROJECT_DIR$/src/wisebird-page-chapter.html" />
         <option value="$PROJECT_DIR$/src/my-app.html" />
         <option value="$PROJECT_DIR$/src/wisebird-page-courseoverview.html" />
+        <option value="$PROJECT_DIR$/src/elements/wisebird-mcquestion.html" />
       </list>
     </option>
   </component>
@@ -155,7 +162,7 @@
     <handled-path value="$PROJECT_DIR$/functions/node_modules" />
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="651" />
     <option name="y" value="62" />
     <option name="width" value="976" />
@@ -176,6 +183,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -205,8 +214,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -382,15 +389,16 @@
       <workItem from="1516118366590" duration="2318000" />
       <workItem from="1516206086105" duration="10198000" />
       <workItem from="1516269676022" duration="12256000" />
-      <workItem from="1516347714061" duration="27009000" />
+      <workItem from="1516347714061" duration="27175000" />
+      <workItem from="1516534900510" duration="4055000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="468896000" />
+    <option name="totallyTimeSpent" value="473117000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="41" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -400,19 +408,19 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17881548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17881548" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1933405" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19602577" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -703,13 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/elements/wisebird-mcquestion.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="55" column="18" lean-forward="true" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/wisebird-page-homescreen.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1827">
@@ -747,7 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="118" column="16" lean-forward="true" selection-start-line="118" selection-start-column="16" selection-end-line="121" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -767,30 +767,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/wisebird-page-courseoverview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#iron-image#0;n#div#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#paper-button#0;n#div#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
-            <marker date="1516383945171" expanded="false" signature="2128:2147" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/my-app.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5010">
-          <caret line="362" column="17" lean-forward="true" selection-start-line="362" selection-start-column="17" selection-end-line="362" selection-end-column="17" />
+        <state relative-caret-position="483">
+          <caret line="351" column="17" lean-forward="true" selection-start-line="311" selection-start-column="16" selection-end-line="351" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wisebird-page-chapter.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="167" column="75" lean-forward="false" selection-start-line="167" selection-start-column="54" selection-end-line="167" selection-end-column="75" />
+        <state relative-caret-position="-546">
+          <caret line="174" column="75" lean-forward="true" selection-start-line="174" selection-start-column="75" selection-end-line="174" selection-end-column="75" />
           <folding>
             <element signature="n#style#0;n#div#0;n#template#2;n#div#0;n#template#0;n#iron-pages#0;n#template#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#iron-image#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
@@ -800,6 +788,24 @@
             <element signature="n#style#0;n#paper-dialog#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#paper-dialog#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wisebird-page-courseoverview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="880">
+          <caret line="45" column="77" lean-forward="false" selection-start-line="45" selection-start-column="77" selection-end-line="45" selection-end-column="77" />
+          <folding>
+            <marker date="1516540088646" expanded="false" signature="2144:2163" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/elements/wisebird-mcquestion.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="34" column="38" lean-forward="true" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -43,7 +43,7 @@
             <template is="dom-repeat" items="{{chaptersComplete}}">
                     <div class="row">
                         <div class="half-row">
-                            <iron-image class="egg" sizing="contain" on-tap="_selectChapter"
+                            <iron-image class="egg" sizing="contain" on-click="_selectChapter" id="[[item]]"
                                         src="../images/course-egg-fill.svg"></iron-image>
                             <br>
                             <paper-button on-tap="_selectChapter" id="[[item]]">[[item]]</paper-button>
