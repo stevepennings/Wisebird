@@ -138,8 +138,10 @@
                             this.splice('addedLanguages',
                                 0, this.addedLanguages.length);
                             for (const key in snapshot.val()) {
-                                console.log(key);
-                                this.addedLanguages.push(key);
+                                if ((snapshot.val())) {
+                                    console.log(key);
+                                    this.addedLanguages.push(key);
+                                }
                             }
                         } else {
                             console.log('No languages added yet..');
