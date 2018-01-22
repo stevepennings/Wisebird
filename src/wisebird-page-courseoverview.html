@@ -40,17 +40,17 @@
         </style>
 
         <div class="content" style="text-align: center;">
-            <template is="dom-repeat" items="{{chaptersComplete}}">
-                    <div class="row">
-                        <div class="half-row">
-                            <iron-image class="egg" sizing="contain" on-click="_selectChapter" id="[[item]]"
-                                        src="../images/course-egg-fill.svg"></iron-image>
-                            <br>
-                            <paper-button on-tap="_selectChapter" id="[[item]]">[[item]]</paper-button>
-                        </div>
+            <template is="dom-repeat" id="chaptersComplete" items="{{chaptersComplete}}">
+                <div class="row">
+                    <div class="half-row">
+                        <iron-image class="egg" sizing="contain" on-click="_selectChapter" id="[[item]]"
+                                    src="../images/course-egg-fill.svg"></iron-image>
+                        <br>
+                        <paper-button on-tap="_selectChapter" id="[[item]]">[[item]]</paper-button>
                     </div>
+                </div>
             </template>
-            <template is="dom-repeat" items="{{chaptersIncomplete}}">
+            <template is="dom-repeat" id="chaptersIncomplete" items="{{chaptersIncomplete}}">
                 <div class="row">
                     <div class="half-row">
                         <iron-image class="egg" sizing="contain" style="opacity: 0.13;"
@@ -104,15 +104,15 @@
                         notify: true,
                     },
                     chaptersComplete: {
-                        type: Object,
+                        type: Array,
                         value: null,
                     },
                     chaptersIncomplete: {
-                        type: Object,
+                        type: Array,
                         value: null,
                     },
                     progress: {
-                        type: Object,
+                        type: Array,
                         value: null,
                     },
                     chapterCount: {
@@ -130,6 +130,7 @@
             constructor() {
                 super();
                 this._boundListener = this.getUser.bind(this);
+                window.addEventListener('chapterCompleted', this._chapterCompleted);
             }
 
             connectedCallback() {
@@ -139,7 +140,6 @@
 
             getUser() {
                 const app = document.querySelector('my-app');
-                console.log('hey');
                 if (app.user) {
                     this.user = app.user;
                     this._getProgress();
@@ -154,6 +154,7 @@
 
             _getProgress() {
                 let user = this.user;
+                const app = document.querySelector('my-app');
                 database.ref('user_chapters/' + user.uid).on('value', (snapshot) => {
                     if (snapshot.val() !== null) {
                         this.progress = (snapshot.val());
@@ -163,9 +164,11 @@
                         this.chaptersComplete = keys.filter(function(key) {
                             return progress[key];
                         });
+                        app.chaptersComplete = this.chaptersComplete;
                         this.chaptersIncomplete = keys.filter(function(key) {
                             return !progress[key];
                         });
+                        app.chaptersIncomplete = this.chaptersIncomplete;
 //                        this.chaptersComplete = keys.filter(function(key) {
 //                            return progress[key];
 //                        });
@@ -177,6 +180,31 @@
                         }));
                     }
                 });
+            }
+
+            _chapterCompleted() {
+                const app = document.querySelector('my-app');
+                let completedChapter = app.chapterSelect;
+                let chapterCount = completedChapter.length;
+                let chapterNumber = Number(
+                    completedChapter.substring(7, chapterCount));
+                chapterNumber++;
+                let nextChapter = 'chapter' + chapterNumber;
+                let chapter = app.chaptersIncomplete[0];
+                if(nextChapter === chapter) {
+                    app.chaptersComplete.push(nextChapter);
+                    app.chaptersIncomplete.splice(0, 1);
+                    this.chaptersComplete = app.chaptersComplete;
+                    this.chaptersIncomplete = app.chaptersIncomplete;
+                    if (app.user) {
+                        if(completedChapter) {
+                            firebase.database().ref(
+                                'user_chapters/' + app.user.uid).update({
+                                [nextChapter]: true,
+                            });
+                        }
+                    }
+                }
             }
 
             completedChapter(key) {

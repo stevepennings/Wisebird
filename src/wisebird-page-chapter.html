@@ -451,6 +451,10 @@
                     } else if (currentQuestion === chapterLength) {
                         this.$.questionFab.setAttribute('style', 'visibility: hidden');
                         this.chapterComplete = true;
+                        this.dispatchEvent(new CustomEvent('chapterCompleted', {
+                            bubbles: true,
+                            composed: true,
+                        }));
                     }
                 }
             }
