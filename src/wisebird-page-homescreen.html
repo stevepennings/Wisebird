@@ -45,7 +45,7 @@
 
         <div class="content">
             <template is="dom-if" if="{{course}}">
-                <template is="dom-repeat" items="[[addedLanguages]]">
+                <template is="dom-repeat" id="addedLanguages" items="{{addedLanguages}}">
                     <wisebird-course-card></wisebird-course-card>
                 </template>
             </template>
@@ -53,15 +53,18 @@
                 <div class="noCourses">
                     Select with the bottom right button a language you're interested in.
                     <p>
-                    <iron-image style="width:150px; height:200px;" sizing="contain"
-                                src="../images/add_image.svg"></iron-image>
+                        <iron-image style="width:150px; height:200px;" sizing="contain"
+                                    src="../images/add_image.svg"></iron-image>
                     </p>
                 </div>
             </template>
         </div>
 
-        <paper-fab noink mini id="dutchFab" value="[[language]]" src="../images/dutch-icon.svg" on-tap="_addCourse"></paper-fab>
-        <paper-fab noink class="mainFab" src="../images/add_white.svg" on-tap="_toggleFab"></paper-fab>
+        <paper-fab noink mini id="dutchFab" value="[[language]]" src="../images/dutch-icon.svg"
+                   on-tap="_addCourse"></paper-fab>
+        <template is="dom-if" if="{{!course}}">
+            <paper-fab noink class="mainFab" src="../images/add_white.svg" on-tap="_toggleFab"></paper-fab>
+        </template>
     </template>
 
     <script>
@@ -72,9 +75,15 @@
 
             static get properties() {
                 return {
+                    user: {
+                        type: Object,
+                        value: null,
+                        notify: true,
+                    },
                     languages: {
                         type: Array,
                         value: [],
+                        notify: true,
                     },
                     addedLanguages: {
                         type: Array,
@@ -98,20 +107,68 @@
             constructor() {
                 super();
                 this.languages = ['dutch'];
+                this._boundListener = this.getUser.bind(this);
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                window.addEventListener('bindUser', this._boundListener);
+            }
+
+            getUser() {
+                const app = document.querySelector('my-app');
+                if (app.user) {
+                    this.user = app.user;
+                    this._getLanguages();
+                } else {
+                    this.dispatchEvent(new CustomEvent('requestChangePage', {
+                        bubbles: true,
+                        composed: true,
+                        detail: {route: '/login'},
+                    }));
+                }
+            }
+
+            _getLanguages() {
+                database.ref('user_languages/' + this.user.uid).on(
+                    'value', (snapshot) => {
+                        if (snapshot.val() !== null) {
+                            console.log((snapshot.val()));
+                            this.course = true;
+                            this.splice('addedLanguages',
+                                0, this.addedLanguages.length);
+                            for (const key in snapshot.val()) {
+                                console.log(key);
+                                this.addedLanguages.push(key);
+                            }
+                        } else {
+                            console.log('No languages added yet..');
+                        }
+                    });
             }
 
             _addCourse(e) {
-                e = this.shadowRoot.getElementById('dutchFab').value;
-                let language;
-                console.log(this.languages);
+                e = e.target.value;
                 switch (e) {
                     case 'dutch':
                         this.toggleFab = false;
-                        language = 'dutch';
                         this.$.dutchFab.setAttribute('style', 'visibility: hidden');
-                        this.languages.pop(language);
+                        this.languages.pop(e);
                         this.course = true;
-                        this.addedLanguages.push('dutch');
+                        this.addedLanguages.push(e);
+                        if (this.user.uid) {
+                            firebase.database().ref('user_languages').child(
+                                this.user.uid).set({'dutch': true});
+                            firebase.database().ref('user_chapters').child(
+                                this.user.uid).child('dutch').set(
+                                {
+                                    'chapter1': true,
+                                    'chapter2': false,
+                                    'chapter3': false,
+                                    'chapter4': false,
+                                    'chapter5': false,
+                                });
+                        }
                         break;
                     default:
                         this.dispatchEvent(new CustomEvent('requestChangePage', {

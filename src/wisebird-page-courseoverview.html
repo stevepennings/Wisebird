@@ -153,11 +153,12 @@
             }
 
             _getProgress() {
-                let user = this.user;
                 const app = document.querySelector('my-app');
-                database.ref('user_chapters/' + user.uid).on('value', (snapshot) => {
+                database.ref('user_chapters/' + app.user.uid + '/dutch/').on(
+                    'value', (snapshot) => {
                     if (snapshot.val() !== null) {
                         this.progress = (snapshot.val());
+                        console.log(snapshot.val());
 //                        this.chapters = Object.keys(snapshot.val());
                         let progress = this.progress;
                         let keys = Object.keys(progress);
@@ -173,11 +174,7 @@
 //                            return progress[key];
 //                        });
                     } else {
-                        this.dispatchEvent(new CustomEvent('requestChangePage', {
-                            bubbles: true,
-                            composed: true,
-                            detail: {route: '/404', replace: true},
-                        }));
+                        console.log('Data of the user not retrieved yet..');
                     }
                 });
             }
@@ -199,7 +196,7 @@
                     if (app.user) {
                         if(completedChapter) {
                             firebase.database().ref(
-                                'user_chapters/' + app.user.uid).update({
+                                'user_chapters/' + app.user.uid + '/dutch/').update({
                                 [nextChapter]: true,
                             });
                         }

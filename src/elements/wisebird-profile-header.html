@@ -67,12 +67,17 @@
 
             constructor() {
                 super();
+                this._boundListener = this.getUser.bind(this);
             }
 
-            ready() {
-                super.ready();
+            connectedCallback() {
+                super.connectedCallback();
+                window.addEventListener('bindUser', this._boundListener);
+            }
+
+            getUser() {
                 const app = document.querySelector('my-app');
-                if(app.user) {
+                if (app.user) {
                     this.user = app.user;
                 } else {
                     this.dispatchEvent(new CustomEvent('requestChangePage', {
