@@ -133,13 +133,11 @@
                 database.ref('user_languages/' + this.user.uid).on(
                     'value', (snapshot) => {
                         if (snapshot.val() !== null) {
-                            console.log((snapshot.val()));
                             this.course = true;
                             this.splice('addedLanguages',
                                 0, this.addedLanguages.length);
                             for (const key in snapshot.val()) {
                                 if ((snapshot.val())) {
-                                    console.log(key);
                                     this.addedLanguages.push(key);
                                 }
                             }

@@ -29,11 +29,6 @@
                 background-color: #fafafa;
                 display: block;
                 height: 100vh;
-
-            }
-
-            #drawer {
-                visibility: var(--app-drawer-width)
             }
 
             app-drawer-layout:not([narrow]) [drawer-toggle] {
@@ -110,7 +105,7 @@
 
         <app-drawer-layout fullbleed narrow="{{narrow}}">
             <!-- Drawer content -->
-            <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]" class="drawer">
+            <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
                 <div class="menu" id="menu">
                     <app-toolbar>
                         <iron-image style="width:36px; height:36px;" sizing="contain"
@@ -256,6 +251,10 @@
                         // User is signed in.
                         console.log('Signed in');
                         this.user = user;
+                        this.dispatchEvent(new CustomEvent('bindUser', {
+                        bubbles: true,
+                        composed: true,
+                    }));
                         if (this.page === 'login') {
                             this.dispatchEvent(new CustomEvent('requestChangePage', {
                                 detail: {route: '/', replace: true},

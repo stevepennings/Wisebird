@@ -359,6 +359,7 @@
             }
 
             selectedChapter() {
+                this.chapterComplete = false;
                 const app = document.querySelector('my-app');
                 this.chapterSelect = app.chapterSelect;
                 if(this.chapterSelect) {
