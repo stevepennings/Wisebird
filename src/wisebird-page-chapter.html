@@ -255,8 +255,8 @@
                 <paper-button dialog-confirm autofocus>Quit</paper-button>
             </div>
         </paper-dialog>
-        <audio id="audio-correct" src="assets/correct_answer.mp3" autostart="false" ></audio>
-        <audio id="audio-wrong" src="assets/wrong_answer.mp3" autostart="false" ></audio>
+        <audio id="audio-correct" src="assets/correct_answer.mp3" autostart="false"></audio>
+        <audio id="audio-wrong" src="assets/wrong_answer.mp3" autostart="false"></audio>
     </template>
 
     <script>
@@ -321,7 +321,7 @@
             constructor() {
                 super();
                 const app = document.querySelector('my-app');
-                if(app.user) {
+                if (app.user) {
                     this.user = app.user;
                 } else {
                     this.dispatchEvent(new CustomEvent('requestChangePage', {
@@ -341,8 +341,8 @@
             ready() {
                 super.ready();
                 const app = document.querySelector('my-app');
-                database.ref('languages/dutch/' + app.chapterSelect).
-                on('value', (snapshot) => {
+                database.ref('languages/dutch/' + app.chapterSelect).on(
+                    'value', (snapshot) => {
                     if (snapshot.val() !== null) {
                         this.questions = snapshot.val();
                         this.chapterLength = this.questions.length;
@@ -362,7 +362,7 @@
                 this.chapterComplete = false;
                 const app = document.querySelector('my-app');
                 this.chapterSelect = app.chapterSelect;
-                if(this.chapterSelect) {
+                if (this.chapterSelect) {
                     this.getChapter();
                     this.getTooltip();
                 }
@@ -399,8 +399,8 @@
             }
 
             getChapter() {
-                database.ref('languages/dutch/' + this.chapterSelect).
-                on('value', (snapshot) => {
+                database.ref('languages/dutch/' + this.chapterSelect).on(
+                    'value', (snapshot) => {
                     if (snapshot.val() !== null) {
                         this.questions = snapshot.val();
                         this.chapterLength = this.questions.length;
@@ -417,16 +417,16 @@
             getTooltip() {
                 database.ref('chapter_tooltips/dutch/chapter1').on(
                     'value', (snapshot) => {
-                    if (snapshot.val() !== null) {
-                        this.tooltip = snapshot.val();
-                    } else {
-                        this.dispatchEvent(new CustomEvent('requestChangePage', {
-                            bubbles: true,
-                            composed: true,
-                            detail: {route: '/404', replace: true},
-                        }));
-                    }
-                });
+                        if (snapshot.val() !== null) {
+                            this.tooltip = snapshot.val();
+                        } else {
+                            this.dispatchEvent(new CustomEvent('requestChangePage', {
+                                bubbles: true,
+                                composed: true,
+                                detail: {route: '/404', replace: true},
+                            }));
+                        }
+                    });
             }
 
             _verifyInput(input) {
@@ -438,6 +438,8 @@
                     let check = this._validate(input);
                     if (check === false) {
                         this._addQuestion();
+                    } else {
+                        this._questionScore();
                     }
                     this._playSound(check);
                     this._openToast(check);
@@ -452,16 +454,37 @@
                     } else if (currentQuestion === chapterLength) {
                         this.$.questionFab.setAttribute('style', 'visibility: hidden');
                         this.chapterComplete = true;
+                        this._chapterScore();
                         this.dispatchEvent(new CustomEvent('chapterCompleted', {
                             bubbles: true,
                             composed: true,
                         }));
+                        this.currentQuestion = 0;
+                        this.currentQuestionShow = 1;
                     }
                 }
             }
 
+            _questionScore() {
+                const app = document.querySelector('my-app');
+                app.questionScore++;
+                firebase.database().ref(
+                    'user_score/' + app.user.uid).update({
+                    'questionScore': app.questionScore,
+                });
+            }
+
+            _chapterScore() {
+                const app = document.querySelector('my-app');
+                app.chapterScore++;
+                firebase.database().ref(
+                    'user_score/' + app.user.uid).update({
+                    'chapterScore': app.chapterScore,
+                });
+            }
+
             _playSound(check) {
-                if(check === true) {
+                if (check === true) {
                     this.shadowRoot.getElementById('audio-correct').play();
                 } else if (check === false) {
                     this.shadowRoot.getElementById('audio-wrong').play();

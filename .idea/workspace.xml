@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/my-app.html" afterPath="$PROJECT_DIR$/src/my-app.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-chapter.html" afterPath="$PROJECT_DIR$/src/wisebird-page-chapter.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-courseoverview.html" afterPath="$PROJECT_DIR$/src/wisebird-page-courseoverview.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/wisebird-page-homescreen.html" afterPath="$PROJECT_DIR$/src/wisebird-page-homescreen.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,12 +15,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="my-app.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/my-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="256" column="24" lean-forward="true" selection-start-line="256" selection-start-column="24" selection-end-line="256" selection-end-column="24" />
+            <state relative-caret-position="243">
+              <caret line="394" column="62" lean-forward="true" selection-start-line="394" selection-start-column="62" selection-end-line="394" selection-end-column="62" />
               <folding>
                 <element signature="n#style#0;n#iron-image#0;n#app-toolbar#0;n#div#0;n#app-drawer#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
               </folding>
@@ -32,8 +31,8 @@
       <file leaf-file-name="wisebird-page-chapter.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/wisebird-page-chapter.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="366" column="38" lean-forward="true" selection-start-line="366" selection-start-column="38" selection-end-line="366" selection-end-column="38" />
+            <state relative-caret-position="308">
+              <caret line="347" column="67" lean-forward="true" selection-start-line="347" selection-start-column="67" selection-end-line="347" selection-end-column="67" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#template#2;n#div#0;n#template#0;n#iron-pages#0;n#template#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#iron-image#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
@@ -43,6 +42,26 @@
                 <element signature="n#style#0;n#paper-dialog#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#paper-dialog#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wisebird-page-courseoverview.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/wisebird-page-courseoverview.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="195" column="24" lean-forward="true" selection-start-line="195" selection-start-column="24" selection-end-line="200" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="wisebird-page-homescreen.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/wisebird-page-homescreen.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="170" column="58" lean-forward="false" selection-start-line="170" selection-start-column="58" selection-end-line="170" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -58,7 +77,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>z-index</find>
       <find>this.dispatchevent</find>
       <find>this.dipatch</find>
       <find>display</find>
@@ -88,6 +106,7 @@
       <find>hey</find>
       <find>addedLanguages</find>
       <find>drawer</find>
+      <find>snapshot</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -168,9 +187,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -198,7 +214,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,12 +396,13 @@
       <workItem from="1516347714061" duration="27175000" />
       <workItem from="1516534900510" duration="17695000" />
       <workItem from="1516609114132" duration="24622000" />
-      <workItem from="1516801962158" duration="2185000" />
+      <workItem from="1516801962158" duration="3435000" />
+      <workItem from="1516834923643" duration="2885000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="513564000" />
+    <option name="totallyTimeSpent" value="517699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="41" width="1938" height="1048" extended-state="6" />
@@ -400,7 +420,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20139635" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20408164" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -438,17 +458,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/my-app.html</url>
-          <line>199</line>
+          <line>202</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/wisebird-page-chapter.html</url>
-          <line>448</line>
+          <line>450</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/wisebird-page-chapter.html</url>
-          <line>458</line>
+          <line>463</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
@@ -744,22 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/wisebird-page-courseoverview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="155" column="37" lean-forward="false" selection-start-line="155" selection-start-column="37" selection-end-line="155" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/wisebird-page-homescreen.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="143" column="33" lean-forward="true" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/elements/wisebird-profile-header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -775,10 +779,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/wisebird-page-courseoverview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="195" column="24" lean-forward="true" selection-start-line="195" selection-start-column="24" selection-end-line="200" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/wisebird-page-homescreen.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="170" column="58" lean-forward="false" selection-start-line="170" selection-start-column="58" selection-end-line="170" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/my-app.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="256" column="24" lean-forward="true" selection-start-line="256" selection-start-column="24" selection-end-line="256" selection-end-column="24" />
+        <state relative-caret-position="243">
+          <caret line="394" column="62" lean-forward="true" selection-start-line="394" selection-start-column="62" selection-end-line="394" selection-end-column="62" />
           <folding>
             <element signature="n#style#0;n#iron-image#0;n#app-toolbar#0;n#div#0;n#app-drawer#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
           </folding>
@@ -787,8 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/wisebird-page-chapter.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="366" column="38" lean-forward="true" selection-start-line="366" selection-start-column="38" selection-end-line="366" selection-end-column="38" />
+        <state relative-caret-position="308">
+          <caret line="347" column="67" lean-forward="true" selection-start-line="347" selection-start-column="67" selection-end-line="347" selection-end-column="67" />
           <folding>
             <element signature="n#style#0;n#div#0;n#template#2;n#div#0;n#template#0;n#iron-pages#0;n#template#0;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#iron-image#0;n#div#0;n#template#1;n#div#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />

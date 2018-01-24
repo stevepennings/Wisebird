@@ -168,6 +168,12 @@
                                     'chapter4': false,
                                     'chapter5': false,
                                 });
+                            firebase.database().ref('user_score').child(
+                                this.user.uid).set(
+                                {
+                                    'questionScore': 0,
+                                    'chapterScore': 0,
+                                });
                         }
                         break;
                     default:
