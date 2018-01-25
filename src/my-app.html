@@ -114,20 +114,13 @@
                     <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
                         <a class="tab" name="homescreen" href="[[rootPath]]homescreen">
                             <iron-icon class="unselected" src="../images/menu/homescreen-white.svg"></iron-icon>
-                            <!--<iron-icon class="selected" src="../images/menu/homescreen-color.svg"></iron-icon>-->
-                        </a>
-                        <a name="leaderboard" href="[[rootPath]]leaderboard">
-                            <iron-icon class="unselected" src="../images/menu/leaderboard-white.svg"></iron-icon>
-                            <!--<iron-icon class="selected" src="../images/menu/leaderboard-color.svg"></iron-icon>-->
                         </a>
                         <div class="actions">
                             <a name="settings" href="[[rootPath]]settings">
                                 <iron-icon class="unselected" src="../images/menu/settings-white.svg"></iron-icon>
-                                <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
                             </a>
                             <a name="logout" href="[[rootPath]]login" on-tap="_logout">
                                 <iron-icon class="unselected" src="../images/menu/logout-white.svg"></iron-icon>
-                                <!--<iron-icon class="selected" src="../images/menu/settings-color.svg"></iron-icon>-->
                             </a>
                             <div class="profile-image"
                                  style="background-image: url('[[user.photoURL]]'); margin-top: 5px;">
@@ -174,7 +167,6 @@
                     <wisebird-page-homescreen name="homescreen"></wisebird-page-homescreen>
                     <wisebird-page-courseoverview name="courseoverview"></wisebird-page-courseoverview>
                     <wisebird-page-chapter name="chapter"></wisebird-page-chapter>
-                    <wisebird-page-leaderboard name="leaderboard"></wisebird-page-leaderboard>
                     <wisebird-page-settings name="settings"></wisebird-page-settings>
                     <wisebird-page-login name="login"></wisebird-page-login>
                     <wisebird-page-view404 name="view404"></wisebird-page-view404>
