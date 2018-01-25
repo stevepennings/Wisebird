@@ -11,6 +11,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="wisebird-page-settings">
@@ -76,6 +78,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-top: 100px;
             }
 
+            paper-fab {
+                z-index: 200;
+                position: fixed;
+                --paper-fab-keyboard-focus-background: linear-gradient(to right, #ff5e62, #ff9966);
+                --paper-fab-background: linear-gradient(to right, #ff5e62, #ff9966);
+                bottom: 30px;
+                right: 30px;
+            }
         </style>
 
         <div class="content">
@@ -85,7 +95,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                      style="float:right; padding-right: 20px; padding-top: 24px;"></paper-toggle-button>
             </div>
             <div class="column">
-                <div class="column-content">Change displayname</div>
+                <paper-input style="margin-left: 12px; margin-right: 12px;"
+                             always-float-label label="Change displayname" value="{{displayName}}"></paper-input>
             </div>
             <div class="column">
                 <div class="column-content">Change main language</div>
@@ -103,6 +114,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
         </div>
 
+        <paper-fab on-click="_saveSettings" src="../images/check.svg"></paper-fab>
     </template>
 
     <script>
@@ -112,7 +124,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             static get properties() {
-                return {};
+                return {
+                    displayName: {
+                        type: String,
+                        value: null,
+                    },
+                };
+            }
+
+            _saveSettings() {
+                const app = document.querySelector('my-app');
+                app.user.displayName = this.displayName;
+                firebase.database().ref('users/' + app.user.uid).update({
+                    'displayName': this.displayName,
+                });
             }
 
             _logout() {
